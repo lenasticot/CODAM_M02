@@ -13,13 +13,22 @@
 //   void  flood_fill(char **tab, t_point size, t_point begin);
 
 // The t_point structure is prototyped like this:
-//   typedef struct  s_point
-//   {
-//     int           x;
-//     int           y;
-//   }               t_point;
+  typedef struct  s_point
+  {
+    int           x;
+    int           y;
+  }               t_point;
 
 void flood_fill(char **tab, t_point size, t_point begin)
 {
+777
+777
+777
 
+//while not bigger than size
+// x++
+//y++
+// 
+// if reaching size
+// go back and move 
 }
