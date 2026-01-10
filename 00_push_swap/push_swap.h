@@ -20,8 +20,7 @@ typedef struct node
 {
     int nbr;
     int pos;
-    struct node *link;
-    struct node *prev;
+    struct node *prev;  
     struct node *next;
 } 
 
