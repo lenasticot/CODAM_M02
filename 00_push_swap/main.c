@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+char **ft_split(const char *s, char c);
+
 typedef struct node
 {
     int nbr;
@@ -9,12 +11,12 @@ typedef struct node
     struct node *next;
 } node;
 
-void *weHaveToGoDeeper(int data, int pos, struct node **head)
+void weHaveToGoDeeper(int data, int pos, struct node **head)
 {
     struct node *newNode;
     newNode = malloc(sizeof(node));
     if(newNode == NULL)
-        return (NULL);
+        return ;
     newNode->nbr = data;
     newNode->pos = pos;
     newNode->prev = *head;
@@ -71,11 +73,15 @@ int only_int_allowed(char **str)
 	j = 0;
 	while(str[i])
 	{
-		if(str[i] && str[i][j] >= 0 && str[i][j] <= 9)		
+		while(str[i][j])
+		{ 
+		if(str[i][j] == '-' || str[i][j] == '+')
 			j++;
-		else if(str[i] && str[i][j] < 0 && str[i][j] > 9)
+		if(str[i][j] < 48 || str[i][j] > 57)
 			return (1);
-
+		j++;
+		}
+		j = 0;
 		i++;
 	}
 	return (0);
@@ -87,18 +93,27 @@ int main(int argc, char **argv)
 	struct node *stack_a;
 	struct node *tail = NULL;
 	struct node *head = NULL;
-	// so i have to put the result of split somewhere
-	if(argc > 2)
-		ft_split(**argv);
-	int check = only_int_allowed(**argv);
+	//will have to check more error
+		// if the string is empty
+	if(argc < 2)
+		return(1);
+	if(argc == 2)
+	{
+		argv = ft_split(argv[1], ' ');
+		i = 0;
+	}
+		
+	int check = only_int_allowed(argv);
 	if(check == 1)
-		return ("error");
-
-	init_stack(&tail, &head, argv[i], i);
+		return (1);
+	int start = ft_atoi(argv[i]);
+	init_stack(&tail, &head, start, i);
 	i++;
+	int node;
 	while(argv[i])
 	{
-		weHaveToGoDeeper(argv[i], i, &head);
+		node = ft_atoi(argv[i]);
+		weHaveToGoDeeper(node, i, &head);
 		i++;
 	}
 	struct node *curr;
@@ -108,8 +123,7 @@ int main(int argc, char **argv)
 		printf("%i\n", curr->nbr);
 		curr = curr->next;
 	}
-	
-
+	return (0);
 }
 
 // if(argc == 2)
