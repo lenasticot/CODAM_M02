@@ -1,19 +1,4 @@
-//il y a du travail
 
-// build the linked list
-
-// receive the list, check if correct
-
-// check if already organized
-
-// need to decide which algorithm to use
-
-// probably have to divide by size
-// if the list is 
-// 3 
-// 5
-// 100
-// 500
 
 
 // to do
@@ -30,10 +15,6 @@
         // 100 numbers
         // 500 numbers
 
-
-// this function is returning the first node back to the caller
-// will probably update it so that it directly remove top most element 
-// and place it to stack b directly
 
 
 #include <stdio.h>
@@ -61,6 +42,8 @@ typedef struct node
 //     return (val);
 // }
 
+// free the node
+
 void free_node(struct node *node)
 {
     if(node->prev != NULL)
@@ -84,6 +67,8 @@ void free_node(struct node *node)
   
 // }
 
+// this one would be the equivalent of ra ? 
+
 void *topBottomSwitch(struct node **head, struct node **tail)
 {
     struct node *curr;
@@ -99,6 +84,8 @@ void *topBottomSwitch(struct node **head, struct node **tail)
     *tail = *head;
     *head = tmp;
 }
+
+// to see if I need this? 
 struct node *find_node_recursive(struct node *node, int pos)
 {
     if(node == NULL)
@@ -140,6 +127,9 @@ void middle_child(int data, int pos, struct node *node)
     
 }
 // creating a new node and pushing it on top
+// do i want to add on top or at the end ?
+// at the begining it will probably not making a big difference so that depends what is the most efficient
+// just checked the guidelines:  The first argument should be at the top of the stack (be careful about the order)
 void *love_on_top(int data, int pos, struct node **tail)
 {
     struct node *newNode;
@@ -156,7 +146,7 @@ void *love_on_top(int data, int pos, struct node **tail)
     *tail = newNode;
 }
 
-
+// definitly will be needed
 void init_stack(struct node **tail, struct node **head, int value, int pos)
 {
     struct node *newNode;
@@ -172,6 +162,9 @@ void init_stack(struct node **tail, struct node **head, int value, int pos)
     *head = newNode;
 }
 
+
+// nothing really clear so far
+// just testing the above function
 void push_swap()
 {
     char *res;
@@ -239,9 +232,11 @@ void push_swap()
     //     }
     // }
 }
-
-int main(void)
-{
-    push_swap();
-
-}
+// im gonna receive a string with arguments
+// i need to check if the arguments are correct
+// if they are not probably send back an error message
+// how do I make sure its correct
+// first what do i need to check
+// if they are all numbers
+// if there is no double numbers
+// guidelines: some arguments not being integers, some arguments exceeding the integer limits, and/or the presence of duplicates.
