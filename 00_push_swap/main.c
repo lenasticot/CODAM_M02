@@ -73,10 +73,10 @@ int only_int_allowed(char **str)
 	j = 0;
 	while(str[i])
 	{
-		while(str[i][j])
-		{ 
 		if(str[i][j] == '-' || str[i][j] == '+')
 			j++;
+		while(str[i][j])
+		{ 
 		if(str[i][j] < 48 || str[i][j] > 57)
 			return (1);
 		j++;
@@ -86,23 +86,31 @@ int only_int_allowed(char **str)
 	}
 	return (0);
 }
+
+// need to put it correctly
+// like the return value
+int ft_verif_double(struct node *curr, int nbr, int pos)
+{
+	int i = 1;
+	while(i < pos)
+	{
+		if(curr->nbr == nbr)
+			return (0);
+		curr = curr->next;		
+		i++;
+	}
+	return (1);
+}
+
 int main(int argc, char **argv)
 {
 	int i = 1;
-
-	struct node *stack_a;
 	struct node *tail = NULL;
 	struct node *head = NULL;
 	//will have to check more error
 		// if the string is empty
 	if(argc < 2)
 		return(1);
-	if(argc == 2)
-	{
-		argv = ft_split(argv[1], ' ');
-		i = 0;
-	}
-		
 	int check = only_int_allowed(argv);
 	if(check == 1)
 		return (1);
@@ -118,9 +126,13 @@ int main(int argc, char **argv)
 	}
 	struct node *curr;
 	curr = tail;
+	// check for double verification
+	// might put it into a helper function
 	while(curr != NULL)
 	{
-		printf("%i\n", curr->nbr);
+		if(ft_verif_double(tail, curr->nbr, curr->pos) == 0)
+			return (1);
+		printf("%i - > %i\n", curr->nbr, curr->pos);
 		curr = curr->next;
 	}
 	return (0);
