@@ -33,5 +33,8 @@ void	weHaveToGoDeeper(int data, int pos, struct node **head);
 void	init_stack(struct node **tail, struct node **head, int value, int pos);
 int		only_int_allowed(char **str);
 int		ft_verif_double(struct node *curr, int nbr, int pos);
+void pb(struct node **a_tail, struct node **b_tail);
+void add_on_top(int data, int pos, struct node **tail);
+void pa(struct node **a_tail, struct node **b_tail);
 
 #endif 

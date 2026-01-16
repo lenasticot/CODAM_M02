@@ -3,15 +3,33 @@
 // pb (push b): Take the first element at the top of a and put it at the top of b.
 // Do nothing if a is empty
 
-// i need the head of stack_a and the head of stack_b
-// I also need to initialize stack_b at some point?
-void pa(struct node **stack_a, struct node **stack_b)
-{
+#include "push_swap.h"
 
+void pb(struct node **a_tail, struct node **b_tail)
+{
+	struct node *tmp = *a_tail;
+
+	*a_tail = (*a_tail)->next;
+	if(*a_tail != NULL)
+		(*a_tail)->prev = NULL;
+	tmp->next = *b_tail;
+	tmp->prev = NULL;
+	if(*b_tail != NULL)
+		(*b_tail)->prev = tmp;
+	*b_tail = tmp;
 	return ;
 }
 
-void pb(struct node **stack_a, struct node **stack_b)
+void pa(struct node **a_tail, struct node **b_tail)
 {
+	struct node *tmp = *b_tail;
+	*b_tail = (*b_tail)->next;
+	if(*b_tail != NULL)
+		(*b_tail)->prev = NULL;
+	tmp->next = *a_tail;
+	tmp->prev = NULL;
+	if(*a_tail != NULL)
+		(*a_tail)->prev = tmp;
+	*a_tail = tmp;
 	return ;
 }

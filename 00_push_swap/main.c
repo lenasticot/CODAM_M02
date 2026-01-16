@@ -6,22 +6,29 @@
 /*   By: leodum <leodum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 15:32:51 by leodum            #+#    #+#             */
-/*   Updated: 2026/01/16 17:54:50 by leodum           ###   ########.fr       */
+/*   Updated: 2026/01/16 20:53:21 by leodum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 
-void whatnow(int pos, struct node **a_head, struct node **a_tail)
+void whatnow(int pos, /*struct node **a_head*/ struct node **a_tail)
 {
 	struct node *b_tail = NULL;
-	struct node *b_head = NULL;
+	// struct node *b_head = NULL;
+	// i need to initialize the b_stack within each situation
+	// because i dont have the info rn
 	
 	if(pos <= 3)
 	{
-		ft_printf("3");
 		// solvefor3(stack_a);
+		pb(a_tail, &b_tail);
+		ft_printf("On top of stack b there is: %i\n", b_tail->nbr);
+		ft_printf("On top of stack a there is: %i\n", (*a_tail)->nbr);
+		pa(a_tail, &b_tail);
+		// ft_printf("On top of stack b there is: %i\n", b_tail->nbr);
+		ft_printf("On top of stack a there is: %i\n", (*a_tail)->nbr);
 	}
 	else if(pos > 3 && pos <= 5)
 	{
@@ -76,6 +83,6 @@ int main(int argc, char **argv)
 		printf("%i - > %i\n", curr->nbr, curr->pos);
 		curr = curr->next;
 	}
-	whatnow(a_head->pos, &a_head, &a_tail);
+	whatnow(a_head->pos, /*&a_head,*/ &a_tail);
 	return (0);
 }

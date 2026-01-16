@@ -7,6 +7,9 @@
 
 // need to see how to send head and tail from each stack
 // to be careful on what to send each time
+
+#include "push_swap.h"
+
 void ra(struct node **a_head, struct node **a_tail)
 {
 	struct node *curr;

@@ -4,6 +4,7 @@
 // The last element becomes the first one.
 // rrr : rra and rrb at the same time.
 
+#include "push_swap.h"
 
 void rra(struct node **stack_a)
 {
