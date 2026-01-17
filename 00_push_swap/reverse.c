@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   reverse.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: leodum <leodum@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/17 16:53:16 by leodum            #+#    #+#             */
+/*   Updated: 2026/01/17 18:47:00 by leodum           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 // rra (reverse rotate a): Shift down all elements of stack a by 1.
 // The last element becomes the first one.
 // rrb (reverse rotate b): Shift down all elements of stack b by 1.
 // The last element becomes the first one.
-// rrr : rra and rrb at the same time.
-
+// rrr : rra and rrb at the same time
 #include "push_swap.h"
 
 void rra(struct node **a_head, struct node **a_tail)
@@ -46,7 +57,7 @@ void rrr(struct node **b_head, struct node **b_tail, struct node **a_head, struc
 	*a_head = (*a_head)->prev;
 	(*a_head)->next = NULL;
 
-	(*a_tail)->prev = tmp;
+	(*a_tail)->prev = a_tmp;
 	a_tmp->prev = NULL;
 	a_tmp->next = *a_tail;
 	*a_tail = a_tmp;

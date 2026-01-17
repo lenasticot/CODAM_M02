@@ -6,7 +6,7 @@
 /*   By: leodum <leodum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 15:32:51 by leodum            #+#    #+#             */
-/*   Updated: 2026/01/17 15:56:24 by leodum           ###   ########.fr       */
+/*   Updated: 2026/01/17 18:53:44 by leodum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,40 +15,28 @@
 
 void whatnow(int pos, struct node **a_head, struct node **a_tail)
 {
-	struct node *b_tail = NULL;
+	//struct node *b_tail = NULL;
 	// struct node *b_head = NULL;
 	// i need to initialize the b_stack within each situation
 	// because i dont have the info rn
 	
 	if(pos <= 3)
 	{
-		// solvefor3(stack_a);
-		pb(a_tail, &b_tail);
-		ft_printf("On top of stack b there is: %i\n", b_tail->nbr);
-		ft_printf("On top of stack a there is: %i\n", (*a_tail)->nbr);
-		pa(a_tail, &b_tail);
-		// ft_printf("On top of stack b there is: %i\n", b_tail->nbr);
-		ft_printf("On top of stack a there is: %i\n", (*a_tail)->nbr);
+		ft_printf("%i\n", (*a_tail)->nbr);
+		ft_printf("%i\n", (*a_tail)->next->nbr);
+		ft_printf("%i\n", (*a_tail)->next->next->nbr);
+		solvefor3(a_head, a_tail);
+
+		ft_printf("%i\n", (*a_tail)->nbr);
+		ft_printf("%i\n", (*a_tail)->next->nbr);
+		ft_printf("%i\n", (*a_tail)->next->next->nbr);
+
+		
 	}
 	else if(pos > 3 && pos <= 5)
 	{
 		ft_printf("5\n");
-		struct node *curr = *a_tail;
-		ft_printf("before rra\n");
-		while(curr)
-		{
-			ft_printf("%i\n", curr->nbr);
-			curr = curr->next;
-		}
-		rra(a_head, a_tail);
-		ft_printf("after rra\n");
-		curr = *a_tail;
-		while(curr)
-		{
-			ft_printf("%i\n", curr->nbr);
-			curr = curr->next;
-		}
-		// solvefor5(stack_a);
+	
 	}
 	else if(pos > 5 && pos <= 100)
 	{

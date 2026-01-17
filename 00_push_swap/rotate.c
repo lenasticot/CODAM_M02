@@ -6,16 +6,24 @@
 /*   By: leodum <leodum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:01:02 by leodum            #+#    #+#             */
-/*   Updated: 2026/01/17 15:42:46 by leodum           ###   ########.fr       */
+/*   Updated: 2026/01/17 17:38:21 by leodum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+// ra (rotate a): Shift up all elements of stack a by 1.
+// The first element becomes the last one.
+// rb (rotate b): Shift up all elements of stack b by 1.
+// The first element becomes the last one.
+// rr : ra and rb at the same time.
+
 void ra(struct node **a_head, struct node **a_tail)
 {
 	struct node *tmp;
 	tmp = *a_tail;
+	if(!a_tail || !(*a_tail)->next)
+		return ;
 
 	*a_tail = (*a_tail)->next;
 	(*a_tail)->prev = NULL;
@@ -26,10 +34,12 @@ void ra(struct node **a_head, struct node **a_tail)
 	
 	return ;
 }
-// need to add a check if empty
+
 void rb(struct node **b_head, struct node **b_tail)
 {
 	struct node *tmp;
+	if(!b_tail || !(*b_tail)->next)
+		return ;
 	tmp = *b_tail;
 
 	*b_tail = (*b_tail)->next;
@@ -46,6 +56,8 @@ void rr(struct node **b_head, struct node **b_tail, struct node **a_head, struct
 {
 	struct node *a_tmp;
 	struct node *b_tmp;
+	if(!a_tail || !(*a_tail)->next || !b_tail || !(*b_tail)->next)
+		return ;
 
 	a_tmp = *a_tail;
 	b_tmp = *b_tail;
