@@ -6,14 +6,14 @@
 /*   By: leodum <leodum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 15:32:51 by leodum            #+#    #+#             */
-/*   Updated: 2026/01/16 20:53:21 by leodum           ###   ########.fr       */
+/*   Updated: 2026/01/17 15:56:24 by leodum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 
-void whatnow(int pos, /*struct node **a_head*/ struct node **a_tail)
+void whatnow(int pos, struct node **a_head, struct node **a_tail)
 {
 	struct node *b_tail = NULL;
 	// struct node *b_head = NULL;
@@ -32,7 +32,22 @@ void whatnow(int pos, /*struct node **a_head*/ struct node **a_tail)
 	}
 	else if(pos > 3 && pos <= 5)
 	{
-		ft_printf("5");
+		ft_printf("5\n");
+		struct node *curr = *a_tail;
+		ft_printf("before rra\n");
+		while(curr)
+		{
+			ft_printf("%i\n", curr->nbr);
+			curr = curr->next;
+		}
+		rra(a_head, a_tail);
+		ft_printf("after rra\n");
+		curr = *a_tail;
+		while(curr)
+		{
+			ft_printf("%i\n", curr->nbr);
+			curr = curr->next;
+		}
 		// solvefor5(stack_a);
 	}
 	else if(pos > 5 && pos <= 100)
@@ -80,9 +95,8 @@ int main(int argc, char **argv)
 	{
 		if(ft_verif_double(a_tail, curr->nbr, curr->pos) == 0)
 			return (1);
-		printf("%i - > %i\n", curr->nbr, curr->pos);
 		curr = curr->next;
 	}
-	whatnow(a_head->pos, /*&a_head,*/ &a_tail);
+	whatnow(a_head->pos, &a_head, &a_tail);
 	return (0);
 }

@@ -163,8 +163,7 @@ void init_stack(struct node **tail, struct node **head, int value, int pos)
 }
 
 
-// nothing really clear so far
-// just testing the above function
+
 void push_swap()
 {
     char *res;
