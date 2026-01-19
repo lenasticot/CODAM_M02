@@ -22,17 +22,32 @@ void solvefor5(struct node **a_head, struct node **a_tail, struct node **b_tail,
         i++;
     }
     solvefor3(a_head, a_tail, b_tail);
-    if((*a_tail)->nbr > (*a_tail)->next->nbr)
-        sa(a_tail);
-    while(!*b_tail)
+    printf("solvefor5 :\n");
+    if((*b_tail)->nbr < (*b_tail)->next->nbr)
+        sb(b_tail);
+    
+    while((*a_tail))
     { 
-    if((*b_tail)->nbr > (*a_tail)->nbr)
+    if((*a_tail)->nbr > (*b_tail)->nbr)
     {
         pb(a_tail, b_tail);
-        rb(b_head, b_tail);
     }
-    else if((*b_tail)->nbr < (*a_tail)->nbr)
-        pa(a_tail, b_tail);
-    }
+    else if((*a_tail)->nbr < (*b_tail)->nbr)
+    {      
+        if((*a_tail)->nbr > (*b_tail)->next->nbr)
+        {
+            pb(a_tail, b_tail);
+            sb(b_tail);
+        }  
+        else
+        {
+            pb(a_tail, b_tail);
+            rb(b_head, b_tail);
+        }
 
+    }
+    }
+    while((*b_tail))
+        pa(a_tail, b_tail);
+    printf("end of solve for 5:\n");
 }

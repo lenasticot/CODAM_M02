@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 16:54:56 by leodum            #+#    #+#             */
-/*   Updated: 2026/01/18 15:27:32 by marvin           ###   ########.fr       */
+/*   Updated: 2026/01/19 21:21:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void sa(struct node **a_tail)
 	
 	if(first->next != NULL)
 		first->next->prev = first;
+	printf("sa\n");
 	return ;
 }
 
@@ -60,6 +61,7 @@ void sb(struct node **b_tail)
 	
 	if(first->next != NULL)
 		first->next->prev = first;
+	printf("sb\n");
 	return ;
 }
 

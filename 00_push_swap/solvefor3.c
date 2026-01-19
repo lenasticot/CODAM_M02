@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 16:58:24 by leodum            #+#    #+#             */
-/*   Updated: 2026/01/18 15:55:30 by marvin           ###   ########.fr       */
+/*   Updated: 2026/01/19 21:24:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void solvefor3(struct node **a_head, struct node **a_tail, struct node **b_tail)
 {
+	printf("solve for 3:\n");
 	if((*a_tail)->nbr > (*a_tail)->next->nbr)
 	{
 		if((*a_tail)->nbr > (*a_tail)->next->next->nbr)
@@ -38,4 +39,5 @@ void solvefor3(struct node **a_head, struct node **a_tail, struct node **b_tail)
 			rra(a_head, a_tail);
 		}
 	}
+	printf("end of solve for 3\n");
 }

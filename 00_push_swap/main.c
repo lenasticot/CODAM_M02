@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 15:32:51 by leodum            #+#    #+#             */
-/*   Updated: 2026/01/19 13:20:37 by marvin           ###   ########.fr       */
+/*   Updated: 2026/01/19 21:23:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 void whatnow(int pos, struct node **a_head, struct node **a_tail)
 {
 	struct node *b_tail = NULL;
-	struct node *b_head = NULL;
-	// i need to initialize the b_stack within each situation
-	// because i dont have the info rn
+	 struct node *b_head = NULL;
 	
 	if(pos <= 3)
 	{	
