@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leodum <leodum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 15:32:51 by leodum            #+#    #+#             */
-/*   Updated: 2026/01/17 18:53:44 by leodum           ###   ########.fr       */
+/*   Updated: 2026/01/19 13:20:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,37 +15,50 @@
 
 void whatnow(int pos, struct node **a_head, struct node **a_tail)
 {
-	//struct node *b_tail = NULL;
-	// struct node *b_head = NULL;
+	struct node *b_tail = NULL;
+	struct node *b_head = NULL;
 	// i need to initialize the b_stack within each situation
 	// because i dont have the info rn
 	
 	if(pos <= 3)
-	{
-		ft_printf("%i\n", (*a_tail)->nbr);
-		ft_printf("%i\n", (*a_tail)->next->nbr);
-		ft_printf("%i\n", (*a_tail)->next->next->nbr);
-		solvefor3(a_head, a_tail);
-
-		ft_printf("%i\n", (*a_tail)->nbr);
-		ft_printf("%i\n", (*a_tail)->next->nbr);
-		ft_printf("%i\n", (*a_tail)->next->next->nbr);
+	{	
+		printf("Before solving:\n");
+		// printf("%i\n", (*a_tail)->nbr);
+		// printf("%i\n", (*a_tail)->next->nbr);
+		// printf("%i\n", (*a_tail)->next->next->nbr);
+		// solvefor3(a_head, a_tail, &b_tail);
+		// printf("After solving:\n");
+		// printf("%i\n", (*a_tail)->nbr);
+		// printf("%i\n", (*a_tail)->next->nbr);
+		// printf("%i\n", (*a_tail)->next->next->nbr);
 
 		
 	}
 	else if(pos > 3 && pos <= 5)
 	{
-		ft_printf("5\n");
+		printf("Before solving:\n");
+		printf("%i\n", (*a_tail)->nbr);
+		printf("%i\n", (*a_tail)->next->nbr);
+		printf("%i\n", (*a_tail)->next->next->nbr);
+		printf("%i\n", (*a_tail)->next->next->next->nbr);
+		printf("%i\n", (*a_tail)->next->next->next->next->nbr);
+		solvefor5(a_head, a_tail, &b_tail, &b_head);
+		printf("After solving:\n");
+		printf("%i\n", (*a_tail)->nbr);
+		printf("%i\n", (*a_tail)->next->nbr);
+		printf("%i\n", (*a_tail)->next->next->nbr);
+		printf("%i\n", (*a_tail)->next->next->next->nbr);
+		printf("%i\n", (*a_tail)->next->next->next->next->nbr);
 	
 	}
 	else if(pos > 5 && pos <= 100)
 	{
-		ft_printf("100");
+		printf("100");
 		// solvefor100(stack_a);
 	}
 	else if(pos > 100)
 	{
-		ft_printf("500");
+		printf("500");
 		// solvefor500(stack_a);
 	}
 }
@@ -64,14 +77,14 @@ int main(int argc, char **argv)
 	int check = only_int_allowed(argv);
 	if(check == 1)
 		return (1);
-	int start = ft_atoi(argv[i]);
+	int start = atoi(argv[i]);
 	// create the stack
 	init_stack(&a_tail, &a_head, start, i);
 	i++;
 	int node;
 	while(argv[i])
 	{
-		node = ft_atoi(argv[i]);
+		node = atoi(argv[i]);
 		weHaveToGoDeeper(node, i, &a_head);
 		i++;
 	}

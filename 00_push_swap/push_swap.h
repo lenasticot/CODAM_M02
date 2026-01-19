@@ -16,8 +16,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "ft_printf/ft_printf.h"
-# include "libft/libft.h"
+// # include "ft_printf/ft_printf.h"
+// # include "libft/libft.h"
 
 typedef struct node
 {
@@ -47,6 +47,7 @@ void	rra(struct node **a_head, struct node **a_tail);
 void	rrb(struct node **b_head, struct node **b_tail);
 void	rrr(struct node **b_head, struct node **b_tail, struct node **a_head, struct node **a_tail);
 
-void solvefor3(struct node **a_head, struct node **a_tail);
+void solvefor3(struct node **a_head, struct node **a_tail, struct node **b_tail);
+void solvefor5(struct node **a_head, struct node **a_tail, struct node **b_tail, struct node **b_head);
 
 #endif 

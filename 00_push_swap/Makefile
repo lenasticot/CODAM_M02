@@ -3,28 +3,28 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: leodum <leodum@student.42.fr>              +#+  +:+       +#+         #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/16 15:49:58 by leodum            #+#    #+#              #
-#    Updated: 2026/01/17 18:47:57 by leodum           ###   ########.fr        #
+#    Updated: 2026/01/18 16:34:23 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
-LIBFT_DIR = libft
-LIBFT = $(LIBFT_DIR)/libft.a
+# LIBFT_DIR = libft
+# LIBFT = $(LIBFT_DIR)/libft.a
 
-PRINTF_DIR = ft_printf
-PRINTF = $(LIBFT_DIR)/libftprintf.a 
+# PRINTF_DIR = ft_printf
+# PRINTF = $(LIBFT_DIR)/libftprintf.a 
 
 
-SRCS = main.c create_llist.c parsing.c push.c rotate.c reverse.c swap.c solvefor3.c
+SRCS = main.c create_llist.c parsing.c push.c rotate.c reverse.c swap.c solvefor3.c solvefor5.c
 OBJS = $(SRCS:.c=.o)
 HEADER = push_swap.h 
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 all: $(NAME)
 
