@@ -36,10 +36,10 @@ int		only_int_allowed(char **str);
 int		ft_verif_double(struct node *curr, int nbr, int pos);
 
 void	sa(struct node **a_tail);
-void	sb(struct node **b_tail);
+void	sb(struct node **b_tail,  struct node **b_head);
 void	ss(struct node **a_tail, struct node **b_tail);
-void	pb(struct node **a_tail, struct node **b_tail);
-void	pa(struct node **a_tail, struct node **b_tail);
+void	pb(struct node **a_tail, struct node **b_tail, struct node **b_head, struct node **a_head);
+void	pa(struct node **a_tail, struct node **b_tail, struct node **a_head);
 void	ra(struct node **a_head, struct node **a_tail);
 void	rb(struct node **b_head, struct node **b_tail);
 void	rr(struct node **b_head, struct node **b_tail, struct node **a_head, struct node **a_tail);
@@ -47,7 +47,7 @@ void	rra(struct node **a_head, struct node **a_tail);
 void	rrb(struct node **b_head, struct node **b_tail);
 void	rrr(struct node **b_head, struct node **b_tail, struct node **a_head, struct node **a_tail);
 
-void solvefor3(struct node **a_head, struct node **a_tail, struct node **b_tail);
+void solvefor3(struct node **a_head, struct node **a_tail, struct node **b_tail, struct node **b_head);
 void solvefor5(struct node **a_head, struct node **a_tail, struct node **b_tail, struct node **b_head);
 
-#endif 
+#endif

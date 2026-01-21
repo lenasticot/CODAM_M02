@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: leodum <leodum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 15:01:02 by leodum            #+#    #+#             */
-/*   Updated: 2026/01/19 21:22:11 by marvin           ###   ########.fr       */
+/*   Updated: 2026/01/21 17:56:27 by leodum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void rb(struct node **b_head, struct node **b_tail)
 
 	*b_tail = (*b_tail)->next;
 	(*b_tail)->prev = NULL;
-	(*b_tail)->next = tmp;
+	(*b_head)->next = tmp;
 	tmp->prev = *b_head;
 	tmp->next = NULL;
 	*b_head = tmp;

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: leodum <leodum@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/16 15:49:58 by leodum            #+#    #+#              #
-#    Updated: 2026/01/18 16:34:23 by marvin           ###   ########.fr        #
+#    Updated: 2026/01/21 11:23:32 by leodum           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,11 +28,11 @@ CFLAGS = -Wall -Wextra -Werror -g
 
 all: $(NAME)
 
-$(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
+# $(LIBFT):
+# 	$(MAKE) -C $(LIBFT_DIR)
 
-$(PRINTF):
-	$(MAKE) -C $(PRINTF_DIR)
+# $(PRINTF):
+# 	$(MAKE) -C $(PRINTF_DIR)
 
 
 $(NAME): $(LIBFT) $(PRINTF) $(OBJS)
@@ -43,13 +43,13 @@ $(NAME): $(LIBFT) $(PRINTF) $(OBJS)
 
 clean:
 	rm -f $(OBJS)
-	$(MAKE) -C $(LIBFT_DIR) clean
-	$(MAKE) -C $(PRINTF_DIR) clean
+# 	$(MAKE) -C $(LIBFT_DIR) clean
+# 	$(MAKE) -C $(PRINTF_DIR) clean
 
 fclean: clean
 	rm -f $(NAME)
-	$(MAKE) -C $(LIBFT_DIR) clean
-	$(MAKE) -C $(PRINTF_DIR) clean
+# 	$(MAKE) -C $(LIBFT_DIR) clean
+# 	$(MAKE) -C $(PRINTF_DIR) clean
 
 re: fclean all
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: leodum <leodum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 16:53:04 by leodum            #+#    #+#             */
-/*   Updated: 2026/01/19 21:21:39 by marvin           ###   ########.fr       */
+/*   Updated: 2026/01/21 18:49:36 by leodum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,36 @@
 // pb (push b): Take the first element at the top of a and put it at the top of b.
 // Do nothing if a is empty.
  
-void pb(struct node **a_tail, struct node **b_tail)
+void pb(struct node **a_tail, struct node **b_tail, struct node **b_head, struct node **a_head)
 {
-	struct node *tmp = *a_tail;
 	if(!a_tail || !(*a_tail))
 		return ;
-
+	struct node *tmp = *a_tail;
 	*a_tail = (*a_tail)->next; 
 	if(*a_tail != NULL)
 		(*a_tail)->prev = NULL;
-	tmp->next = *b_tail;
-	tmp->prev = NULL;
-	if(*b_tail != NULL)
+	else
+		*a_head = NULL;
+	// hope its this
+	if((*b_tail) == NULL && (*b_head) == NULL)
+	{
+		*b_tail = tmp;
+		*b_head = tmp;
+		tmp->next = NULL;
+		tmp->prev = NULL;
+	}
+	else
+	{
+		tmp->next = *b_tail;
+		tmp->prev = NULL;
 		(*b_tail)->prev = tmp;
-	*b_tail = tmp;
+		*b_tail = tmp;
+	}
 	printf("pb\n");
 	return ;
 }
 
-void pa(struct node **a_tail, struct node **b_tail)
+void pa(struct node **a_tail, struct node **b_tail, struct node **a_head)
 {
 	if(!b_tail || !(*b_tail))
 		return ;
@@ -43,11 +54,20 @@ void pa(struct node **a_tail, struct node **b_tail)
 	*b_tail = (*b_tail)->next;
 	if(*b_tail != NULL)
 		(*b_tail)->prev = NULL;
-	tmp->next = *a_tail;
-	tmp->prev = NULL;
-	if(*a_tail != NULL)
+	if((*a_tail) == NULL && (*a_head) == NULL)
+	{
+		*a_tail = tmp;
+		*a_head = tmp;
+		tmp->next = NULL;
+		tmp->prev = NULL;
+	}
+	else
+	{
+		tmp->next = *a_tail;
+		tmp->prev = NULL;
 		(*a_tail)->prev = tmp;
-	*a_tail = tmp;
+		*a_tail = tmp;
+	}
 	printf("pa\n");
 	return ;
 }

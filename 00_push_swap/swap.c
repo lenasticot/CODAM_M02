@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: leodum <leodum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 16:54:56 by leodum            #+#    #+#             */
-/*   Updated: 2026/01/19 21:21:57 by marvin           ###   ########.fr       */
+/*   Updated: 2026/01/21 12:48:00 by leodum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void sa(struct node **a_tail)
 	return ;
 }
 
-void sb(struct node **b_tail)
+void sb(struct node **b_tail, struct node **b_head)
 {
 	struct node *first;
 	struct node *second;
@@ -61,12 +61,14 @@ void sb(struct node **b_tail)
 	
 	if(first->next != NULL)
 		first->next->prev = first;
+	else
+		*b_head = first;
 	printf("sb\n");
 	return ;
 }
 
-void ss(struct node **a_tail, struct node **b_tail)
-{
-	sa(a_tail);
-	sb(b_tail);
-}
+// void ss(struct node **a_tail, struct node **b_tail)
+// {
+// 	sa(a_tail);
+// 	sb(b_tail);
+// }
