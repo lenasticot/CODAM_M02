@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 15:32:51 by leodum            #+#    #+#             */
-/*   Updated: 2026/01/19 21:23:02 by marvin           ###   ########.fr       */
+/*   Updated: 2026/01/20 21:47:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,21 @@ void whatnow(int pos, struct node **a_head, struct node **a_tail)
 	else if(pos > 3 && pos <= 5)
 	{
 		printf("Before solving:\n");
-		printf("%i\n", (*a_tail)->nbr);
-		printf("%i\n", (*a_tail)->next->nbr);
-		printf("%i\n", (*a_tail)->next->next->nbr);
-		printf("%i\n", (*a_tail)->next->next->next->nbr);
-		printf("%i\n", (*a_tail)->next->next->next->next->nbr);
+	struct node *before = *a_tail;
+		while(before)
+		{
+			printf("%i\n", before->nbr);
+			before = before->next;
+		}
+
 		solvefor5(a_head, a_tail, &b_tail, &b_head);
 		printf("After solving:\n");
-		printf("%i\n", (*a_tail)->nbr);
-		printf("%i\n", (*a_tail)->next->nbr);
-		printf("%i\n", (*a_tail)->next->next->nbr);
-		printf("%i\n", (*a_tail)->next->next->next->nbr);
-		printf("%i\n", (*a_tail)->next->next->next->next->nbr);
-	
+	struct node *after = *a_tail;
+		while(after)
+		{
+			printf("%i\n", after->nbr);
+			after = after->next;
+		}
 	}
 	else if(pos > 5 && pos <= 100)
 	{
