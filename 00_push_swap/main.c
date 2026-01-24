@@ -6,13 +6,30 @@
 /*   By: leodum <leodum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 15:32:51 by leodum            #+#    #+#             */
-/*   Updated: 2026/01/21 12:19:52 by leodum           ###   ########.fr       */
+/*   Updated: 2026/01/23 19:04:50 by leodum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-
+// only did 1 star because i just wanna check a_tail but not modify it
+int parseForInd(struct node **a_tail)
+{
+	int i; 
+	struct node *curr; 
+	while(a_tail)
+	{
+		curr = a_tail;
+		while (curr)
+		{
+			i = 1;
+			if(curr->nbr > curr->next->nbr)
+				i++;
+				curr = curr->next;
+		}
+		(*a_tail)->ind = i;
+		*a_tail = (*a_tail)->next;
+	}
+}
 void whatnow(int pos, struct node **a_head, struct node **a_tail)
 {
 	struct node *b_tail = NULL;

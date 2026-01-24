@@ -23,6 +23,7 @@ typedef struct node
 {
     int nbr;
     int pos;
+	int ind;
     struct node *prev;  
     struct node *next;
 } node;
