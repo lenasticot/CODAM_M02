@@ -35,12 +35,13 @@ void	weHaveToGoDeeper(int data, int pos, struct node **head);
 
 int		only_int_allowed(char **str);
 int		ft_verif_double(struct node *curr, int nbr, int pos);
+int	parse_for_ind(struct node *curr, int nbr);
 
 void	sa(struct node **a_tail);
 void	sb(struct node **b_tail,  struct node **b_head);
 void	ss(struct node **a_tail, struct node **b_tail);
 void	pb(struct node **a_tail, struct node **b_tail, struct node **b_head, struct node **a_head);
-void	pa(struct node **a_tail, struct node **b_tail, struct node **a_head);
+void	pa(struct node **a_tail, struct node **b_tail, struct node **a_head, struct node **b_head);
 void	ra(struct node **a_head, struct node **a_tail);
 void	rb(struct node **b_head, struct node **b_tail);
 void	rr(struct node **b_head, struct node **b_tail, struct node **a_head, struct node **a_tail);
@@ -50,5 +51,10 @@ void	rrr(struct node **b_head, struct node **b_tail, struct node **a_head, struc
 
 void solvefor3(struct node **a_head, struct node **a_tail, struct node **b_tail, struct node **b_head);
 void solvefor5(struct node **a_head, struct node **a_tail, struct node **b_tail, struct node **b_head);
+
+
+void radixsort(struct node **a_tail, struct node **a_head, struct node **b_tail, struct node **b_head);
+int get_max_bits(int size);
+int stackSize(struct node *a_tail);
 
 #endif

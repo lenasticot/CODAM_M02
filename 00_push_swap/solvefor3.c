@@ -6,7 +6,7 @@
 /*   By: leodum <leodum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 16:58:24 by leodum            #+#    #+#             */
-/*   Updated: 2026/01/21 18:50:53 by leodum           ###   ########.fr       */
+/*   Updated: 2026/01/25 19:33:26 by leodum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void solvefor3(struct node **a_head, struct node **a_tail, struct node **b_tail,
 		{
 			pb(a_tail, b_tail, b_head, a_head);
 			sa(a_tail);
-			pa(a_tail, b_tail, a_head);
+			pa(a_tail, b_tail, a_head, b_head);
 		}
 		else
 		{

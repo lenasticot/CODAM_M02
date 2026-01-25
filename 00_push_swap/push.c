@@ -6,7 +6,7 @@
 /*   By: leodum <leodum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 16:53:04 by leodum            #+#    #+#             */
-/*   Updated: 2026/01/21 18:49:36 by leodum           ###   ########.fr       */
+/*   Updated: 2026/01/25 19:32:26 by leodum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void pb(struct node **a_tail, struct node **b_tail, struct node **b_head, struct
 	return ;
 }
 
-void pa(struct node **a_tail, struct node **b_tail, struct node **a_head)
+void pa(struct node **a_tail, struct node **b_tail, struct node **a_head, struct node **b_head)
 {
 	if(!b_tail || !(*b_tail))
 		return ;
@@ -54,6 +54,8 @@ void pa(struct node **a_tail, struct node **b_tail, struct node **a_head)
 	*b_tail = (*b_tail)->next;
 	if(*b_tail != NULL)
 		(*b_tail)->prev = NULL;
+	else
+		*b_head = NULL;	
 	if((*a_tail) == NULL && (*a_head) == NULL)
 	{
 		*a_tail = tmp;

@@ -6,72 +6,62 @@
 /*   By: leodum <leodum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 14:48:58 by leodum            #+#    #+#             */
-/*   Updated: 2026/01/23 18:46:13 by leodum           ###   ########.fr       */
+/*   Updated: 2026/01/25 19:40:28 by leodum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	count_digits(int d)
+int stackSize(struct node *a_tail)
 {
-	int	i;
-
-	i = 0;
-	if (d == 0)
-		return (1);
-	while (d != 0)
+	int i = 0;
+	while(a_tail)
 	{
 		i++;
-		d = d / 10;
+		a_tail = a_tail->next;
 	}
 	return (i);
 }
 
-void countingsort(struct node **a_tail)
+int get_max_bits(int size)
 {
-	// Declare a count array < cntArr[] > of size < max(arr[]) +1 >
-	// Traverse input array < arr[] > and map each element of < arr[] > as an index of < cntArr[] >
-	// Create an array < ans[] > of size N
-	// Traverse array < arr[] > from end and update < ans[cntArr[arr[i]] -1] = arr[i] >
-	// Also update cntArr[arr[i]] = cntArr[arr[i]]--
+	int i = 0;
 
-	int *cntArr;
-	cntArr = malloc(sizeof(int) * (*a_tail)->pos);
-	if(cntArr = NULL)
-		return ; 
-	struct node *curr = a_tail;
-	while(curr)
+	while(size > 0)
 	{
-		
+		size = size / 2;
+		i++;
 	}
-	//start by trying to sort single digit integers
-	// should use list to have the whole numbers
-	
-	//here i solve each number
-	free (cntArr);
+	return (i);
 }
-
-void radixsort(struct node **a_tail, struct node **a_head, struct node *b_tail, struct node **b_head)
+void radixsort(struct node **a_tail, struct node **a_head, struct node **b_tail, struct node **b_head)
 {
-	// Find te largest element to determines how many times we will iterate
-	// Sort the elements based on the unit place digits
-	// Repeat x times nb of digits
+	int max = get_max_bits((*a_head)->pos -1);
+	int bit = 0;
+	int stack_size;
+	int i = 0;
 	
-	// need to know how many digits i have
-	
-	
-// 	Step 1: Normalize your numbers (CRITICAL FIRST STEP)
-// The problem: You might have negative numbers, or numbers like [42, -17, 1003, 5]
-// The solution: Convert them to simple indices (0, 1, 2, 3, etc.) based on their rank
-// What to do:
+	while(bit < max)
+	{
+		stack_size = stackSize(*a_tail);
+		i = 0;
+		while(i < stack_size)
+		{
+			if(((*a_tail)->ind >> bit )& 1)
+				ra(a_head, a_tail);
+			else
+				pb(a_tail, b_tail, b_head, a_head);
+			i++;
+		}
+		bit++;
+	}
+	// Problem here when passing the loop does not stop
+	while(b_tail)
+		pa(a_tail, b_tail, a_head, b_head);
 
-// Before sorting, figure out which number is smallest, 2nd smallest, 3rd smallest, etc.
-// Replace each number with its "index" (smallest = 0, next = 1, etc.)
-// Now you're sorting [0, 1, 2, 3, 4] instead of weird numbers
-
-// Why this matters: Radix works on bits. 42 in binary is different from index 2. You need consistent, small indices.
-// Store this: Either update nbr in your nodes, or add a new field like index to your struct
-
-
-	
+	while(a_tail)
+	{
+		printf("%i", (*a_tail)->nbr);
+		a_tail = (*a_tail)->next;
+	}
 }

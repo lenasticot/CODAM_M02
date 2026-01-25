@@ -66,7 +66,7 @@ void solvefor5(struct node **a_head, struct node **a_tail, struct node **b_tail,
     }
 
     while((*b_tail))
-        pa(a_tail, b_tail, a_head);
+        pa(a_tail, b_tail, a_head, b_head);
 	
 printf("current a_tail\n");
 	struct node *finalcurr = *a_tail;

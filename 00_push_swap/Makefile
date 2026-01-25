@@ -6,7 +6,7 @@
 #    By: leodum <leodum@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/16 15:49:58 by leodum            #+#    #+#              #
-#    Updated: 2026/01/21 11:23:32 by leodum           ###   ########.fr        #
+#    Updated: 2026/01/25 19:25:48 by leodum           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ NAME = push_swap
 # PRINTF = $(LIBFT_DIR)/libftprintf.a 
 
 
-SRCS = main.c create_llist.c parsing.c push.c rotate.c reverse.c swap.c solvefor3.c solvefor5.c
+SRCS = main.c create_llist.c parsing.c push.c rotate.c reverse.c swap.c solvefor3.c solvefor5.c radixsort.c
 OBJS = $(SRCS:.c=.o)
 HEADER = push_swap.h 
 

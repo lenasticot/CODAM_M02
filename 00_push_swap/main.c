@@ -6,78 +6,25 @@
 /*   By: leodum <leodum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 15:32:51 by leodum            #+#    #+#             */
-/*   Updated: 2026/01/23 19:04:50 by leodum           ###   ########.fr       */
+/*   Updated: 2026/01/25 19:29:53 by leodum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 // only did 1 star because i just wanna check a_tail but not modify it
-int parseForInd(struct node **a_tail)
-{
-	int i; 
-	struct node *curr; 
-	while(a_tail)
-	{
-		curr = a_tail;
-		while (curr)
-		{
-			i = 1;
-			if(curr->nbr > curr->next->nbr)
-				i++;
-				curr = curr->next;
-		}
-		(*a_tail)->ind = i;
-		*a_tail = (*a_tail)->next;
-	}
-}
+
 void whatnow(int pos, struct node **a_head, struct node **a_tail)
 {
 	struct node *b_tail = NULL;
 	 struct node *b_head = NULL;
 	
 	if(pos <= 3)
-	{	
-		printf("Before solving:\n");
-		struct node *before = *a_tail;
-		while(before)
-		{
-			printf("%i\n", before->nbr);
-			before = before->next;
-		}
 		solvefor3(a_head, a_tail, &b_tail, &b_head);
-		printf("After solving:\n");
-	struct node *after = *a_tail;
-		while(after)
-		{
-			printf("%i\n", after->nbr);
-			after = after->next;
-		}
-		
-	}
 	else if(pos > 3 && pos <= 5)
-	{
-		printf("Before solving:\n");
-	struct node *before = *a_tail;
-		while(before)
-		{
-			printf("%i\n", before->nbr);
-			before = before->next;
-		}
-
 		solvefor5(a_head, a_tail, &b_tail, &b_head);
-		printf("After solving:\n");
-	struct node *after = *a_tail;
-		while(after)
-		{
-			printf("%i\n", after->nbr);
-			after = after->next;
-		}
-	}
+
 	else if(pos > 5 && pos <= 100)
-	{
-		printf("100");
-		// solvefor100(stack_a);
-	}
+		radixsort(a_tail, a_head, &b_tail, &b_head);
 	else if(pos > 100)
 	{
 		printf("500");
@@ -110,16 +57,17 @@ int main(int argc, char **argv)
 		weHaveToGoDeeper(node, i, &a_head);
 		i++;
 	}
-	// check for double verification
-	// might put it into a helper function
 	struct node *curr;
 	curr = a_tail;
 	while(curr != NULL)
 	{
+		curr->ind = parse_for_ind(a_tail, curr->nbr);
 		if(ft_verif_double(a_tail, curr->nbr, curr->pos) == 0)
 			return (1);
 		curr = curr->next;
+		
 	}
+	
 	whatnow(a_head->pos, &a_head, &a_tail);
 	return (0);
 }

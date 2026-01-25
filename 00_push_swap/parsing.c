@@ -6,7 +6,7 @@
 /*   By: leodum <leodum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 15:29:35 by leodum            #+#    #+#             */
-/*   Updated: 2026/01/16 15:33:57 by leodum           ###   ########.fr       */
+/*   Updated: 2026/01/25 17:13:36 by leodum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,19 @@ int only_int_allowed(char **str)
 		i++;
 	}
 	return (0);
+}
+int parse_for_ind(struct node *curr, int nbr)
+{
+	int ind = 0;
+
+	while(curr)
+	{
+		if(nbr > curr->nbr)
+			ind++;
+		curr = curr->next;
+	}
+	
+	return (ind);
 }
 
 int ft_verif_double(struct node *curr, int nbr, int pos)
