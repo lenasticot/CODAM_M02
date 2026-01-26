@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   radixsort.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leodum <leodum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 14:48:58 by leodum            #+#    #+#             */
-/*   Updated: 2026/01/25 19:40:28 by leodum           ###   ########.fr       */
+/*   Updated: 2026/01/25 22:10:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void radixsort(struct node **a_tail, struct node **a_head, struct node **b_tail,
 	
 	while(bit < max)
 	{
+		printf("\n========== BIT POSITION %d ==========\n", bit);
 		stack_size = stackSize(*a_tail);
 		i = 0;
 		while(i < stack_size)
@@ -50,18 +51,39 @@ void radixsort(struct node **a_tail, struct node **a_head, struct node **b_tail,
 			if(((*a_tail)->ind >> bit )& 1)
 				ra(a_head, a_tail);
 			else
-				pb(a_tail, b_tail, b_head, a_head);
+				pb(a_tail, b_tail, b_head, a_head);	
+				
 			i++;
 		}
-		bit++;
-	}
-	// Problem here when passing the loop does not stop
-	while(b_tail)
+		printf("Après séparation:\n");
+        printf("Stack A indices: ");
+		     struct node *tmp_a = *a_tail;
+		   while(tmp_a)
+        {
+            printf("%d ", tmp_a->ind);
+            tmp_a = tmp_a->next;
+        }
+        printf("\n");
+		printf("Stack B indices: ");
+        struct node *tmp_b = *b_tail;
+        while(tmp_b)
+        {
+            printf("%d ", tmp_b->ind);
+            tmp_b = tmp_b->next;
+        }
+        printf("\n");
+	
+		while(*b_tail)
 		pa(a_tail, b_tail, a_head, b_head);
-
-	while(a_tail)
+		 
+        printf("Après avoir tout ramené:\n");
+        printf("Stack A indices: ");
+	struct node *curr = *a_tail;
+	while(curr)
 	{
-		printf("%i", (*a_tail)->nbr);
-		a_tail = (*a_tail)->next;
+		printf("%i ", curr->ind);
+		curr = curr->next;
+	}
+		bit++;
 	}
 }
