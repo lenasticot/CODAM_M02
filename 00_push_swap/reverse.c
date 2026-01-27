@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 16:53:16 by leodum            #+#    #+#             */
-/*   Updated: 2026/01/27 17:00:04 by marvin           ###   ########.fr       */
+/*   Updated: 2026/01/27 17:17:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	rra(struct node **a_head, struct node **a_tail)
 	last->next = *a_tail;
 	(*a_tail)->prev = last;
 	*a_tail = last;
-
+	printf("rra\n");
 	// tmp = *a_head;
 	// *a_head = (*a_head)->prev;
 	// (*a_head)->next = NULL;
