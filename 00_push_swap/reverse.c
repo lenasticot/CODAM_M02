@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 16:53:16 by leodum            #+#    #+#             */
-/*   Updated: 2026/01/26 22:37:25 by marvin           ###   ########.fr       */
+/*   Updated: 2026/01/27 17:00:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,26 @@
 
 void	rra(struct node **a_head, struct node **a_tail)
 {
-	struct node	*tmp;
+	struct node	*last;
 
-	tmp = *a_head;
-	*a_head = (*a_head)->prev;
+	if(!*a_head || !(*a_head)->prev)
+		return ;
+
+	last = *a_head;
+	*a_head = last->prev;
 	(*a_head)->next = NULL;
-	(*a_tail)->prev = tmp;
-	tmp->prev = NULL;
-	tmp->next = *a_tail;
-	*a_tail = tmp;
+	last->prev = NULL;
+	last->next = *a_tail;
+	(*a_tail)->prev = last;
+	*a_tail = last;
+
+	// tmp = *a_head;
+	// *a_head = (*a_head)->prev;
+	// (*a_head)->next = NULL;
+	// (*a_tail)->prev = tmp;
+	// tmp->prev = NULL;
+	// tmp->next = *a_tail;
+	// *a_tail = tmp;
 }
 
 void	rrb(struct node **b_head, struct node **b_tail)

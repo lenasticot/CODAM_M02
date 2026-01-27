@@ -12,38 +12,49 @@
 
 #include "push_swap.h"
 
+int find_pos(struct node *a_tail, int ind)
+{
+	int pos;
+
+	pos = 0;
+	while(a_tail)
+	{
+		if(a_tail->ind == ind)
+			return (pos);
+		pos++;
+		a_tail = a_tail->next;
+	}
+	return (-1);
+}
+
 void	solvefor5(struct node **a_head, struct node **a_tail,
 	struct node **b_tail, struct node **b_head)
 {
-	int	i;
+	int pos;
+	int size;
+	int i;
 
-	i = 1;
-	while (i <= 2)
-	{
-		pb(a_tail, b_tail, b_head, a_head);
-		i++;
-	}
-	solvefor3(a_head, a_tail, b_tail, b_head);
-	if ((*b_tail)->nbr < (*b_tail)->next->nbr)
-		sb(b_tail, b_head);
-	while ((*a_tail))
-	{
-		if ((*a_tail)->nbr > (*b_tail)->nbr)
-			pb(a_tail, b_tail, b_head, a_head);
-		else if ((*a_tail)->nbr < (*b_tail)->nbr)
+	i = 0;	
+	size = 5;
+	while(i < 2)
+	{	
+		pos = find_pos(*a_tail, i);
+		if(pos <= size /2)
 		{
-			if ((*a_tail)->nbr > (*b_tail)->next->nbr)
-			{
-				pb(a_tail, b_tail, b_head, a_head);
-				sb(b_tail, b_head);
-			}
-			else
-			{
-				pb(a_tail, b_tail, b_head, a_head);
-				rb(b_head, b_tail);
-			}
+			while((*a_tail)->ind != i)
+				ra(a_head, a_tail);
+			pb(a_tail, b_tail, b_head, a_head);
 		}
+		else
+		{
+			while((*a_tail)->ind != i)
+				rra(a_head, a_tail);
+			pb(a_tail, b_tail, b_head, a_head);
+		}
+		i++;
+		size--;
 	}
-	while ((*b_tail))
-		pa(a_tail, b_tail, a_head, b_head);
+	solvefor3(a_head, a_tail);
+	pa(a_tail, b_tail, a_head, b_head);
+	pa(a_tail, b_tail, a_head, b_head);
 }

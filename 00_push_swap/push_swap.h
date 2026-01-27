@@ -30,7 +30,7 @@ typedef struct node
 
 void	whatnow(int pos, struct node **a_head, struct node **a_tail);
 void	init_stack(struct node **tail, struct node **head, int value, int pos);
-void	weHaveToGoDeeper(int data, int pos, struct node **head);
+void	add_node_below(int data, int pos, struct node **head);
 
 int		only_int_allowed(char **str);
 int		ft_verif_double(struct node *curr, int nbr, int pos);
@@ -52,10 +52,10 @@ void	rrb(struct node **b_head, struct node **b_tail);
 void	rrr(struct node **b_head, struct node **b_tail,
 			struct node **a_head, struct node **a_tail);
 
-void	solvefor3(struct node **a_head, struct node **a_tail,
-			struct node **b_tail, struct node **b_head);
+void	solvefor3(struct node **a_head, struct node **a_tail);
 void	solvefor5(struct node **a_head, struct node **a_tail,
 			struct node **b_tail, struct node **b_head);
+int		find_pos(struct node *a_tail, int ind);
 void	radixsort(struct node **a_tail, struct node **a_head,
 			struct node **b_tail, struct node **b_head);
 int		get_max_bits(int size);
