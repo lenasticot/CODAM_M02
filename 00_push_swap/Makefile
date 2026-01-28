@@ -6,7 +6,7 @@
 #    By: leodum <leodum@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/16 15:49:58 by leodum            #+#    #+#              #
-#    Updated: 2026/01/25 19:25:48 by leodum           ###   ########.fr        #
+#    Updated: 2026/01/28 20:13:57 by leodum           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,12 +19,13 @@ NAME = push_swap
 # PRINTF = $(LIBFT_DIR)/libftprintf.a 
 
 
-SRCS = main.c create_llist.c parsing.c push.c rotate.c reverse.c swap.c solvefor3.c solvefor5.c radixsort.c
+SRCS = main.c create_llist.c parsing.c operations/push.c operations/rotate.c operations/reverse.c operations/swap.c smallsolving.c radixsort.c
 OBJS = $(SRCS:.c=.o)
 HEADER = push_swap.h 
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
+INCLUDES = -I.
 
 all: $(NAME)
 

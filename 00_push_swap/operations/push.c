@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: leodum <leodum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 16:53:04 by leodum            #+#    #+#             */
-/*   Updated: 2026/01/26 22:29:50 by marvin           ###   ########.fr       */
+/*   Updated: 2026/01/28 20:48:31 by leodum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	pb(struct node **a_tail, struct node **b_tail,
 	struct node **b_head, struct node **a_head)
@@ -39,7 +39,7 @@ void	pb(struct node **a_tail, struct node **b_tail,
 		(*b_tail)->prev = tmp;
 		*b_tail = tmp;
 	}
-	printf("pb\n");
+	write(1, "pb\n", 3);
 }
 
 void	pa(struct node **a_tail, struct node **b_tail,
@@ -69,5 +69,5 @@ void	pa(struct node **a_tail, struct node **b_tail,
 		(*a_tail)->prev = tmp;
 		*a_tail = tmp;
 	}
-	printf("pa\n");
+	write(1, "pa\n", 3);
 }

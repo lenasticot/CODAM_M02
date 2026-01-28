@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: leodum <leodum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 15:29:35 by leodum            #+#    #+#             */
-/*   Updated: 2026/01/26 22:16:48 by marvin           ###   ########.fr       */
+/*   Updated: 2026/01/28 16:45:56 by leodum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,18 @@ int	parse_for_ind(struct node *curr, int nbr)
 	return (ind);
 }
 
+
+int check_for_order(struct node *a_tail)
+{
+	while(a_tail && a_tail->next)
+	{
+		if (a_tail->ind > a_tail->next->ind)
+			return (0);
+		a_tail = a_tail->next;
+	}
+	return (1);
+	
+}
 int	ft_verif_double(struct node *curr, int nbr, int pos)
 {
 	int	i;

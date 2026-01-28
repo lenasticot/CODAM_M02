@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   radixsort.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: leodum <leodum@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/22 14:48:58 by leodum            #+#    #+#             */
-/*   Updated: 2026/01/26 22:35:30 by marvin           ###   ########.fr       */
+/*   Updated: 2026/01/28 19:40:59 by leodum           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,7 @@ void	radixsort(struct node **a_tail, struct node **a_head,
 			i++;
 		}
 		while (*b_tail)
-		{
 			pa(a_tail, b_tail, a_head, b_head);
-		}
 		bit++;
 	}
 }
