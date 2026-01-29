@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leodum <leodum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 15:32:51 by leodum            #+#    #+#             */
-/*   Updated: 2026/01/28 20:34:43 by leodum           ###   ########.fr       */
+/*   Updated: 2026/01/29 21:08:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+
+int	print_error(void)
+{
+	write(2, "Error\n", 6);
+	return (1);
+}
 
 void free_stack(struct node **stack)
 {
@@ -47,28 +54,58 @@ void	push_swap(int pos, struct node **a_head, struct node **a_tail)
 		free_stack(&b_tail);
 }
 
-int validate_input(int argc, char **argv)
+int	ft_atol(char *nptr, int *res)
 {
-	if (argc < 2)
-		return (1);
-	if (only_int_allowed(argv))
-		return (1);
-	return (0);
+	int	i;
+	long	result;
+	long	sign;
+
+	result = 0;
+	i = 0;
+	sign = 1;
+	while (nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13))
+		i++;
+	if (nptr[i] == '+' || nptr[i] == '-')
+	{
+		if (nptr[i] == '-')
+			sign = -1;
+		i++;
+	}
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		result = result * 10 + (nptr[i] - '0');
+		i++;
+	}
+	result = result * sign;
+	if (result > 2147483647 || result < -2147483648)
+        return (0); 
+	*res = (int)result;
+	return (1);
 }
 
 void build_stack(struct node **a_tail, struct node **a_head, char **argv)
 {
 	int i;
 	int node;
+	int start;
 
 	i = 1;
-
-	init_stack(a_tail, a_head, atoi(argv[i]), i);
+	if(!ft_atol(argv[i], &start))
+	{
+		print_error();
+		return ;
+	}
+	init_stack(a_tail, a_head, start, i);
 	i++;
 	
 	while(argv[i])
 	{
-		node = atoi(argv[i]);
+		if(!ft_atol(argv[i], &node))
+		{
+			free_stack(a_tail);
+			print_error();
+			return ;
+		}
 		add_node_below(node, i, a_head);
 		i++;
 	}
@@ -96,13 +133,15 @@ int	main(int argc, char **argv)
 
 	a_tail = NULL;
 	a_head = NULL;
-	if (validate_input(argc, argv))
-		return (1);
+	if (argc < 2)
+		return (0);
+	if (only_int_allowed(argv))
+		return (print_error());
 	build_stack(&a_tail, &a_head, argv);
 	if (additional_checks(a_tail))
 	{
 		free_stack(&a_tail);
-		return (1);
+		return (print_error());
 	}
 	if (check_for_order(a_tail))
 	{

@@ -3,36 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leodum <leodum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 15:29:35 by leodum            #+#    #+#             */
-/*   Updated: 2026/01/28 16:45:56 by leodum           ###   ########.fr       */
+/*   Updated: 2026/01/29 20:53:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	only_int_allowed(char **str)
-{
-	int	i;
-	int	j;
 
-	i = 1;
-	j = 0;
-	while (str[i])
-	{
-		if (str[i][j] == '-' || str[i][j] == '+')
-			j++;
-		while (str[i][j])
-		{
-			if (str[i][j] < 48 || str[i][j] > 57)
-				return (1);
-			j++;
-		}
-		j = 0;
-		i++;
-	}
-	return (0);
+int is_valid_number(char *str)
+{
+    int i;
+    
+    i = 0;
+
+    while (str[i] == ' ' || str[i] == '\t')
+        i++;
+    if (str[i] == '\0')
+        return (0);
+    if (str[i] == '+' || str[i] == '-')
+        i++;
+    if (str[i] < '0' || str[i] > '9')
+        return (0);
+    while (str[i])
+    {
+        if (str[i] < '0' || str[i] > '9')
+            return (0);
+        i++;
+    }
+    return (1);
+}
+
+int only_int_allowed(char **str)
+{
+    int i;
+    
+    i = 1;
+    while (str[i])
+    {
+        if (!is_valid_number(str[i]))
+            return (1); 
+        i++;
+    }
+    return (0);  
 }
 
 int	parse_for_ind(struct node *curr, int nbr)
