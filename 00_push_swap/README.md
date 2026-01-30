@@ -1,4 +1,4 @@
-*This project has been created as part of the 42 curriculum by [Ton nom/login 42].*
+*This project has been created as part of the 42 curriculum by leodum.*
 
 # Push_swap
 
@@ -65,11 +65,13 @@ Expected output:
 
 **Algorithm Theory:**
 - [Radix Sort - GeeksforGeeks](https://www.geeksforgeeks.org/radix-sort/)
-- [Sorting Algorithms Visualization](https://www.toptal.com/developers/sorting-algorithms)
+sorting-algorithms)
 - [Stack Data Structure](https://en.wikipedia.org/wiki/Stack_(abstract_data_type))
+- [Asymptotic Notations 101: Big O, Big Omega, & Theta (Asymptotic Analysis Bootcamp)] (https://www.youtube.com/watch?v=0oDAlMwTrLo&list=PLaRCVIXVlHUSu7ICY8iKSTJMHaCrKjwJm&index=6)
 
 **Linked Lists in C:**
 - [Doubly Linked List Implementation](https://www.geeksforgeeks.org/doubly-linked-list/)
+- [Short introduction to doubly linked lists] (https://www.youtube.com/watch?v=9ArYyWQJgOU&list=PLfqABt5AS4FmXeWuuNDS3XGENJO1VYGxl&index=12)
 
 ### AI Usage
 
