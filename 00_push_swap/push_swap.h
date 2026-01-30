@@ -16,8 +16,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-// # include "ft_printf/ft_printf.h"
-// # include "libft/libft.h"
 
 typedef struct node
 {
@@ -28,35 +26,34 @@ typedef struct node
 	struct node	*next;
 }	t_node;
 
+int		ft_atol(char *nptr, int *res);
+void	build_stack(struct node **a_tail, struct node **a_head, char **argv);
 void	push_swap(int pos, struct node **a_head, struct node **a_tail);
 void	init_stack(struct node **tail, struct node **head, int value, int pos);
 void	add_node_below(int data, int pos, struct node **head);
-void 	free_stack(struct node **stack);
 
 int		only_int_allowed(char **str);
 int		ft_verif_double(struct node *curr, int nbr, int pos);
 int		parse_for_ind(struct node *curr, int nbr);
-int 	check_for_order(struct node *a_tail);
+int		check_for_order(struct node *a_tail);
+
+int		print_error(void);
+void	free_stack(struct node **stack);
+int		additional_checks(struct node *a_tail);
 
 void	sa(struct node **a_tail);
 void	sb(struct node **b_tail, struct node **b_head);
-void	ss(struct node **a_tail, struct node **b_tail);
 void	pb(struct node **a_tail, struct node **b_tail,
 			struct node **b_head, struct node **a_head);
 void	pa(struct node **a_tail, struct node **b_tail,
 			struct node **a_head, struct node **b_head);
 void	ra(struct node **a_head, struct node **a_tail);
 void	rb(struct node **b_head, struct node **b_tail);
-void	rr(struct node **b_head, struct node **b_tail,
-			struct node **a_head, struct node **a_tail);
 void	rra(struct node **a_head, struct node **a_tail);
-void	rrb(struct node **b_head, struct node **b_tail);
-void	rrr(struct node **b_head, struct node **b_tail,
-			struct node **a_head, struct node **a_tail);
-	
-void 	solvefor2(struct node **a_tail, struct node **a_head);
+
+void	solvefor2(struct node **a_tail, struct node **a_head);
 void	solvefor3(struct node **a_head, struct node **a_tail);
-void 	solvefor4(struct node **a_head, struct node **a_tail,
+void	solvefor4(struct node **a_head, struct node **a_tail,
 			struct node **b_tail, struct node **b_head);
 void	solvefor5(struct node **a_head, struct node **a_tail,
 			struct node **b_tail, struct node **b_head);
