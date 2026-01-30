@@ -4,3 +4,9 @@ linked_list_tuto.c
 a.out
 todo.txt
 test.c
+additional_tests.sh
+test_basic.sh
+test_edge_cases.sh
+test_perf.sh
+visualizer.sh
+checker_linux
