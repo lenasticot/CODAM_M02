@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leodum <leodum@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 16:54:56 by leodum            #+#    #+#             */
-/*   Updated: 2026/01/28 20:47:59 by leodum           ###   ########.fr       */
+/*   Updated: 2026/01/30 10:03:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	sa(struct node **a_tail)
+void	sa(struct node **a_tail, struct node **a_head)
 {
 	struct node	*first;
 	struct node	*second;
@@ -28,6 +28,8 @@ void	sa(struct node **a_tail)
 	second->next = first;
 	if (first->next != NULL)
 		first->next->prev = first;
+	else
+		*a_head = first;
 	write(1, "sa\n", 3);
 }
 

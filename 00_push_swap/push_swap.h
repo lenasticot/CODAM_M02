@@ -41,7 +41,7 @@ int		print_error(void);
 void	free_stack(struct node **stack);
 int		additional_checks(struct node *a_tail);
 
-void	sa(struct node **a_tail);
+void	sa(struct node **a_tail, struct node **a_head);
 void	sb(struct node **b_tail, struct node **b_head);
 void	pb(struct node **a_tail, struct node **b_tail,
 			struct node **b_head, struct node **a_head);

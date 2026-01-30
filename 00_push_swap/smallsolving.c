@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 16:58:24 by leodum            #+#    #+#             */
-/*   Updated: 2026/01/30 08:58:47 by marvin           ###   ########.fr       */
+/*   Updated: 2026/01/30 10:03:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,16 @@ void	solvefor3(struct node **a_head, struct node **a_tail)
 	{
 		ra(a_head, a_tail);
 		if ((*a_tail)->ind > (*a_tail)->next->ind)
-			sa(a_tail);
+			sa(a_tail, a_head);
 	}
 	else if (second > first && second > third)
 	{
 		rra(a_head, a_tail);
 		if ((*a_tail)->ind > (*a_tail)->next->ind)
-			sa(a_tail);
+			sa(a_tail, a_head);
 	}
 	else if (first > second)
-		sa(a_tail);
+		sa(a_tail, a_head);
 }
 
 int	find_pos(struct node *a_tail, int ind)
