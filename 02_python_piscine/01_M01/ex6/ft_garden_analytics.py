@@ -36,69 +36,110 @@ class GardenManager:
          @staticmethod
          def plant_types():
               pass
-
-            
              
         
 class Garden():
     def __init__(self, owner):
         self.owner = owner
+        self.plants_list = []
+        self.total_growth = 0
+
     def add_plant(self, plant):
-        pass
+        self.plants_list.append(plant)
+        print(f"Added {plant.name} to {self.owner}'s garden")
+
     def all_plants_grow(self):
-        pass
+        print(f"{self.owner} is helping all plants grow...")
+        for plant in self.plants_list:
+            self.total_growth += 1
+            plant.grow(1)
+            print(f"{plant.name} grew 1 cm")
+
     def get_report(self):
-        pass
+        # Affiche "=== [owner]'s Garden Report ==="
+        # Liste toutes les plantes avec leur __str__()
+        # Affiche les stats (plants added, total growth, plant types)
+        regular = 0
+        flowering = 0
+        prize_flower= 0
+        print(f"=== {self.owner}'s Garden report ===")
+        print("Plants in garden:")
+        for plant in self.plants_list:
+            print(f"- {plant}")
+            if(isinstance(plant, PrizeFlower)):
+                prize_flower += 1
+            elif(isinstance(plant, FloweringPlant)):
+                flowering += 1
+            elif(isinstance(plant, Plant)):
+                regular += 1
+           
+        print(f"\nPlants added: {len(self.plants_list)}, Total growth: {self.total_growth}")
+        print(f"Plant types: {regular} regular, {flowering} flowering, {prize_flower} prize flowers")
     def calculate_score(self):
-        pass
-    
+        score = 0
+        for plant in self.plants_list:
+            score += plant.get_height()
+            if isinstance(plant, PrizeFlower):
+                score += plant.prize_points
+        return score
+
+#ok 
 class Plant():
-    """Add information about the plants here"""
-    def __init__(self, name, age, height, type, color):
+    def __init__(self, name, height):
          self.name = name
-         self.age = age
          self.height = height
-         self.type = type
-         self.color = color
     def get_height(self):
         return self._height
+
     def set_height(self, value):
         if value < 0:
             print(f"Invalid operation attempted height {value} [REJECTED]")
         else:
             self._height = value
-    def get_age(self):
-        return self._age
-    def set_age(self, value):
-        if value < 0:
-            print(f"Invalid operation attempted age {value} [REJECTED]")
-        else:
-            self._age = value
-    def grow(self, cm):
-        pass
-    def __str__(self):
-        pass
-        
     
-         
-
+    def grow(self, cm):
+        if cm < 0:
+            print("Invalid operation, need positive value to grow")
+        else:
+            self.height += cm
+  
+    def __str__(self):
+        return f"{self.name} : {self.height} cm"
+        
+#ok    
 class FloweringPlant(Plant):
+    """To add on top of plant"""
     def __init__(self, name, height, color):
-        pass
-    def bloom(self):
-        pass
+        super().__init__(name, height)
+        self.color = color
     def __str__(self):
-        pass
+        return f"{self.name}: {self.height} cm, flowers (blooming)"
 
+#ok
 class PrizeFlower(FloweringPlant):
-    def __init__(self, name, height, color, prize_point):
-        pass
-    def prize_point(self):
-        pass
+    """to add on top of flowering plant"""
+    def __init__(self, name, height, color, points):
+        super().__init__(name, height, color)
+        self.points = points
     def __str__(self):
-        pass
+        return f"{self.name}: {self.height} cm, flowers (blooming), Prize point: {self.points}"
 
 if __name__ == "__main__":
     print("=== Garden Management System Demo ===")
+    alice_garden = Garden("Alice")
+    oak_tree = Plant("Oak Tree", 101)
+    rose = FloweringPlant("Rose", 26, "red")
+    sunflower = PrizeFlower("Sunflower", 51, "yellow", 10)
+    print(oak_tree)
+    print(rose)
+    print(sunflower)
+
+    
+    alice_garden.add_plant(oak_tree)
+    alice_garden.add_plant(rose)
+    alice_garden.add_plant(sunflower)
+    alice_garden.all_plants_grow()
+    alice_garden.get_report()
+
 
 
