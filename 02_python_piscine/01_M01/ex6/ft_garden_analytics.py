@@ -15,8 +15,11 @@ class GardenManager:
 	"""
     def __init__(self, garden):
         self.garden = garden
+        _total_gardens = 0
+        self.garden_list = []
     def add_garden(self, garden):
-         pass
+        self.garden_list.append(garden)
+        print(f"{garden.owner}'s garden has been created")
     @classmethod
     def create_garden_network(cls):
          pass
@@ -56,9 +59,6 @@ class Garden():
             print(f"{plant.name} grew 1 cm")
 
     def get_report(self):
-        # Affiche "=== [owner]'s Garden Report ==="
-        # Liste toutes les plantes avec leur __str__()
-        # Affiche les stats (plants added, total growth, plant types)
         regular = 0
         flowering = 0
         prize_flower= 0
@@ -108,7 +108,6 @@ class Plant():
         
 #ok    
 class FloweringPlant(Plant):
-    """To add on top of plant"""
     def __init__(self, name, height, color):
         super().__init__(name, height)
         self.color = color
@@ -117,7 +116,6 @@ class FloweringPlant(Plant):
 
 #ok
 class PrizeFlower(FloweringPlant):
-    """to add on top of flowering plant"""
     def __init__(self, name, height, color, points):
         super().__init__(name, height, color)
         self.points = points
@@ -133,7 +131,8 @@ if __name__ == "__main__":
     print(oak_tree)
     print(rose)
     print(sunflower)
-
+    alice = GardenManager(alice_garden)
+    alice.add_garden(alice_garden)
     
     alice_garden.add_plant(oak_tree)
     alice_garden.add_plant(rose)
