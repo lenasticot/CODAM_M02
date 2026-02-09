@@ -15,32 +15,43 @@ class GardenManager:
 	"""
     def __init__(self, garden):
         self.garden = garden
-    def add_garden(garden):
+    def add_garden(self, garden):
          pass
     @classmethod
-    def create_garden_network():
+    def create_garden_network(cls):
          pass
     @classmethod
-    def total_garden():
+    def total_garden(cls):
          pass
     class GardenStats:
          """
          helper inside the manager for calculating statistics
          """
          @staticmethod
-         def calculate_growth(cls):
+         def calculate_growth():
               pass
          @staticmethod
-         def calculate_height(cls):
+         def calculate_height():
               pass
          @staticmethod
-         def plant_types(cls):
+         def plant_types():
               pass
 
             
              
         
-
+class Garden():
+    def __init__(self, owner):
+        self.owner = owner
+    def add_plant(self, plant):
+        pass
+    def all_plants_grow(self):
+        pass
+    def get_report(self):
+        pass
+    def calculate_score(self):
+        pass
+    
 class Plant():
     """Add information about the plants here"""
     def __init__(self, name, age, height, type, color):
@@ -49,40 +60,45 @@ class Plant():
          self.height = height
          self.type = type
          self.color = color
+    def get_height(self):
+        return self._height
+    def set_height(self, value):
+        if value < 0:
+            print(f"Invalid operation attempted height {value} [REJECTED]")
+        else:
+            self._height = value
+    def get_age(self):
+        return self._age
+    def set_age(self, value):
+        if value < 0:
+            print(f"Invalid operation attempted age {value} [REJECTED]")
+        else:
+            self._age = value
+    def grow(self, cm):
+        pass
     def __str__(self):
-         # need to add the person garden name 
-         # so need to link the garden creator
-         # and 
-         return f"Added {self.name} to "
-	
+        pass
+        
     
          
 
 class FloweringPlant(Plant):
-    pass
+    def __init__(self, name, height, color):
+        pass
+    def bloom(self):
+        pass
+    def __str__(self):
+        pass
 
-class PrizeFlower(Plant):
-    pass
+class PrizeFlower(FloweringPlant):
+    def __init__(self, name, height, color, prize_point):
+        pass
+    def prize_point(self):
+        pass
+    def __str__(self):
+        pass
 
 if __name__ == "__main__":
     print("=== Garden Management System Demo ===")
 
-"""Class Garden Manager 
-- Create the person
-- Create the garden
-	Class Garden Stats
-     - class method: Display the different plants
-      - class method: display the new added plants
-       - class method: Display the types of new plants added
-        - height validation test
-          - class method: Garden scores
-            - class method: Total gardens managed
-
-Class Garden
-- add plant to the total managed
-- does the total from prize points?
-	Class Plant
-     - Define plant type, color, height...etc.
-      - Static method : flowering plants
-       - Static method: Prize flower"""
 
