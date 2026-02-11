@@ -14,8 +14,7 @@ class GardenManager:
 	Can handle multiple gardens
 	"""
     _total_gardens = 0
-    def __init__(self, garden):
-        self.garden = garden
+    def __init__(self):
         self.garden_list = []
     def add_garden(self, garden):
         self.garden_list.append(garden)
@@ -23,10 +22,20 @@ class GardenManager:
         print(f"{garden.owner}'s garden has been created")
     @classmethod
     def create_garden_network(cls):
-         pass
+         for manager in cls:
+             GardenManager.garden_list.append(manager)
+             GardenManager._total_gardens += 1
+             print(f"{manager.owner}'s garden has been created")         
     @classmethod
     def total_garden(cls):
-         pass
+         print(f"Total garden managed: {cls._total_gardens}")
+    def print_scores(self):
+        print(f"Garden scores - ", end="")
+        for garden in self.garden_list:
+            print(f"{garden.owner}: {garden.calculate_score()} ", end="")
+            print()
+        
+    
     class GardenStats:
          """
          helper inside the manager for calculating statistics
@@ -132,8 +141,13 @@ if __name__ == "__main__":
     print(oak_tree)
     print(rose)
     print(sunflower)
-    alice = GardenManager(alice_garden)
-    alice.add_garden(alice_garden)
+    bob_garden = Garden("Bob")
+    tomato = PrizeFlower("tomato", 37, "red", 20)
+    hibiscus = FloweringPlant("hibiscus", 54, "pink")
+    
+    manager = GardenManager()
+    manager.add_garden(alice_garden)
+    manager.add_garden(bob_garden)
     
     alice_garden.add_plant(oak_tree)
     alice_garden.add_plant(rose)
@@ -141,6 +155,19 @@ if __name__ == "__main__":
     alice_garden.all_plants_grow()
     alice_garden.get_report()
     alice_garden.calculate_score()
+    bob_garden.add_plant(tomato)
+    bob_garden.add_plant(hibiscus)
+    bob_garden.all_plants_grow()
+    bob_garden.get_report()
+    bob_garden.calculate_score()
+    manager.print_scores()
+    GardenManager.total_garden()
 
 
 
+# # De l'extérieur :
+# GardenManager.GardenStats.validate_heights(plants)
+
+# # De l'intérieur de GardenManager :
+# self.GardenStats.validate_heights(plants)
+# # Ou : GardenStats.validate_heights(plants)
