@@ -13,12 +13,13 @@ class GardenManager:
     """
 	Can handle multiple gardens
 	"""
+    _total_gardens = 0
     def __init__(self, garden):
         self.garden = garden
-        _total_gardens = 0
         self.garden_list = []
     def add_garden(self, garden):
         self.garden_list.append(garden)
+        GardenManager._total_gardens += 1
         print(f"{garden.owner}'s garden has been created")
     @classmethod
     def create_garden_network(cls):
@@ -78,9 +79,9 @@ class Garden():
     def calculate_score(self):
         score = 0
         for plant in self.plants_list:
-            score += plant.get_height()
+            score += plant.height
             if isinstance(plant, PrizeFlower):
-                score += plant.prize_points
+                score += plant.points
         return score
 
 #ok 
@@ -139,6 +140,7 @@ if __name__ == "__main__":
     alice_garden.add_plant(sunflower)
     alice_garden.all_plants_grow()
     alice_garden.get_report()
+    alice_garden.calculate_score()
 
 
 
