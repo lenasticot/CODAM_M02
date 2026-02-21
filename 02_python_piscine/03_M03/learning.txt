@@ -1,0 +1,47 @@
+Set Data type
+Set data type is a mutable and unordered collection of unique hashable elements, meaning:
+	- you can add or remove elements from an existing Set
+	- a set doesn't maintain any particular order of its elements
+	- Duplicate elements aren't allowed
+	- Each element must have a hash value that stays the same for its entire lifetime
+
+There is different ways to create sets
+	- Set litterals
+		This is done using curly braces {}
+		example: {obj_0[, obj_1, ..., obj_n]}
+		You can add a tuple inside a set, it wont modify it
+		example: 
+		rgb_colors = {
+			(51, 255, 87),
+			(51, 87, 255),
+			(241, 196, 15),
+		}
+		The elements of a set can be objects of different data types.
+		Elements must be hashable, that means you can add a tuples but you can't add a list, or dictionaries, bytearray
+	- The set() constructor
+		The set() constructor is useful for cases when you want to create an empty set, example:
+		empty = set()
+		You can build a set from a list or a tulpe with the constructor, as well as strings which will generate a set of characters. 
+		When using the set constructor, the argument must be iterable. The constructor will create individual elements compared to the set litteals which does not unpack it
+	- A set comprehension
+		It is a concise way to create a set by evaluating an expression over an iterable.
+		The syntax is the folowing:
+			{expression for member in iterable [if condition]}
+				the comprehension 'expression' provides an element in each iteration
+				the current 'member' represents the current item or value in the iterable
+				the 'iterable' can be any iterable object including a list, tule, set, generator or similar type
+				the 'if condition' is optional that you can use to filter existing collection or generate elements conditionally
+			example:
+				usernames = [
+					...     "Alice",
+					...     " bob",
+					...     "ALICE  ",
+					...     "Bob",
+					...     "charlie",
+					...     "Charlie",
+					...     "JOHN"
+					... ]
+					
+					>>> {name.lower().strip() for name in usernames}
+					{'bob', 'alice', 'john', 'charlie'}
+
