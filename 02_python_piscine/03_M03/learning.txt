@@ -6,7 +6,7 @@ Set data type is a mutable and unordered collection of unique hashable elements,
 	- Each element must have a hash value that stays the same for its entire lifetime
 
 There is different ways to create sets
-	- Set litterals
+	- Set literals
 		This is done using curly braces {}
 		example: {obj_0[, obj_1, ..., obj_n]}
 		You can add a tuple inside a set, it wont modify it
@@ -44,4 +44,31 @@ There is different ways to create sets
 					
 					>>> {name.lower().strip() for name in usernames}
 					{'bob', 'alice', 'john', 'charlie'}
+
+
+
+Dictionaries
+	A python dictionary consists of a collection of key-value pais, where each key corresponds to its associated value.
+	Python dictionaries have the following characteristics:
+		- Mutable: the dictionary values can be updated in place
+		- Dynamic: Dictionaries can grow and shrink as needed
+		- Efficient: they're implemented as hash tables, which allows for fast key lookup
+		- Ordered: they keep their items in the same order
+	There is also the following restrictions:
+		- Hashable: you can't use unshashabe objects like lists as dictionary keys
+		- Unique: cannot have duplicate keys
+	Different ways to create a dictionary:
+		- Set Literals
+			You can define a dictionary by enclose a comma-separated series of key-value pairs in curly braces {}
+			To separate the keys from their values, you need to use a colon :
+			example:
+				{
+				<key_1>: <value_1>,
+    			<key_2>: <value_2>,
+    			...,
+    			<key_N>: <value_N>,
+				}
+		- The dict() constructor
+			same as set
+
 
