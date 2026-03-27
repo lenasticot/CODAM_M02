@@ -1,0 +1,74 @@
+Set Data type
+Set data type is a mutable and unordered collection of unique hashable elements, meaning:
+	- you can add or remove elements from an existing Set
+	- a set doesn't maintain any particular order of its elements
+	- Duplicate elements aren't allowed
+	- Each element must have a hash value that stays the same for its entire lifetime
+
+There is different ways to create sets
+	- Set literals
+		This is done using curly braces {}
+		example: {obj_0[, obj_1, ..., obj_n]}
+		You can add a tuple inside a set, it wont modify it
+		example: 
+		rgb_colors = {
+			(51, 255, 87),
+			(51, 87, 255),
+			(241, 196, 15),
+		}
+		The elements of a set can be objects of different data types.
+		Elements must be hashable, that means you can add a tuples but you can't add a list, or dictionaries, bytearray
+	- The set() constructor
+		The set() constructor is useful for cases when you want to create an empty set, example:
+		empty = set()
+		You can build a set from a list or a tulpe with the constructor, as well as strings which will generate a set of characters. 
+		When using the set constructor, the argument must be iterable. The constructor will create individual elements compared to the set litteals which does not unpack it
+	- A set comprehension
+		It is a concise way to create a set by evaluating an expression over an iterable.
+		The syntax is the folowing:
+			{expression for member in iterable [if condition]}
+				the comprehension 'expression' provides an element in each iteration
+				the current 'member' represents the current item or value in the iterable
+				the 'iterable' can be any iterable object including a list, tule, set, generator or similar type
+				the 'if condition' is optional that you can use to filter existing collection or generate elements conditionally
+			example:
+				usernames = [
+					...     "Alice",
+					...     " bob",
+					...     "ALICE  ",
+					...     "Bob",
+					...     "charlie",
+					...     "Charlie",
+					...     "JOHN"
+					... ]
+					
+					>>> {name.lower().strip() for name in usernames}
+					{'bob', 'alice', 'john', 'charlie'}
+
+
+
+Dictionaries
+	A python dictionary consists of a collection of key-value pais, where each key corresponds to its associated value.
+	Python dictionaries have the following characteristics:
+		- Mutable: the dictionary values can be updated in place
+		- Dynamic: Dictionaries can grow and shrink as needed
+		- Efficient: they're implemented as hash tables, which allows for fast key lookup
+		- Ordered: they keep their items in the same order
+	There is also the following restrictions:
+		- Hashable: you can't use unshashabe objects like lists as dictionary keys
+		- Unique: cannot have duplicate keys
+	Different ways to create a dictionary:
+		- Set Literals
+			You can define a dictionary by enclose a comma-separated series of key-value pairs in curly braces {}
+			To separate the keys from their values, you need to use a colon :
+			example:
+				{
+				<key_1>: <value_1>,
+    			<key_2>: <value_2>,
+    			...,
+    			<key_N>: <value_N>,
+				}
+		- The dict() constructor
+			same as set
+
+
