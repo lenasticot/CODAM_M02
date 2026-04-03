@@ -1,7 +1,7 @@
 def reading_file():
     print("Accessing Storage Vault: ancien_fragment.txt")
     try:
-        file = open("ancient_fragment.txt", "r")
+        file = open("../ancient_fragment.txt", "r")
     except FileNotFoundError as e:
         print(f"Error: {e}")
         return

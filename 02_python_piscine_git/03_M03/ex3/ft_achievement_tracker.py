@@ -1,22 +1,20 @@
-#need to add a possibility to accept external achievments
-#else use one provided
+
 
 def achievement_analytics(alice, bob, charlie):
-    print("=== Achievement Analytics === \n")
-    unique_achievements = alice | bob | charlie
-    alice_achievements = alice.difference(bob, charlie)
-    bob_achievements = bob.difference(alice, charlie)
-    charlie_achievements = charlie.difference(bob, alice)
-    rare_achievements = alice_achievements | bob_achievements | charlie_achievements
-    #problem level 10 is here for some reason?
-    print(f"All unique achievements: {unique_achievements}")
-    print(f"Total unique achievements: {len(unique_achievements)}")
+    print("\n=== Achievement Analytics === ")
+    unique_ach = alice | bob | charlie
+    alice_ach = alice.difference(bob, charlie)
+    bob_ach = bob.difference(alice, charlie)
+    charlie_ach = charlie.difference(bob, alice)
+    rare_ach = alice_ach | bob_ach | charlie_ach
+    print(f"All unique achievements: {unique_ach}")
+    print(f"Total unique achievements: {len(unique_ach)}")
     print("")
     print(f"Common to all player {alice & bob & charlie}")
-    print(f"Rare achievements: {rare_achievements}")
+    print(f"Rare achievements: {rare_ach}\n")
     print(f"Alice vs Bob Common: {alice & bob}")
-    print(f"Alice unique: {alice_achievements}")
-    print(f"Bob unique: {bob_achievements}")
+    print(f"Alice unique: {alice_ach}")
+    print(f"Bob unique: {bob_ach}")
 
 
 def achievement_hunter():
@@ -29,6 +27,7 @@ def achievement_hunter():
         "level_10",
         "treasure_hunter",
         "speed_demon",
+        "boss_lady"
     }
     bob = {
         "first_kill",
@@ -43,7 +42,6 @@ def achievement_hunter():
         "speed_demon",
         "perfectionist"
     }
-
     print(f"Player {player_1} achievements: {alice}")
     print(f"Player {player_2} achievements: {bob}")
     print(f"Player {player_3} achievements: {charlie}")

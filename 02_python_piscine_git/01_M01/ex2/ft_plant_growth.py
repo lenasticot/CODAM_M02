@@ -1,23 +1,30 @@
 class Plant:
-    def __init__(self, name, height, age):
-        self.name = name
-        self.height = height
-        self.age = age
+    """Represents a growing garden plant."""
 
-    def grow(self, cm: int):
+    def __init__(self, name: str, height: int, age: int) -> None:
+        """Create a Plant with a name, height (cm), and age (days)."""
+        self.name: str = name
+        self.height: int = height
+        self.age: int = age
+
+    def grow(self, cm: int) -> None:
+        """Increase plant height (cm)."""
         self.height += cm
 
-    def time(self, duration: int):
+    def time(self, duration: int) -> None:
+        """Increase plant age (days)."""
         self.age += duration
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.name}: {self.height} cm, {self.age} days old"
 
-    def get_info(self):
+    def get_info(self) -> None:
+        """Print current plant information."""
         print(self)
 
 
 if __name__ == "__main__":
+
     plant1 = Plant("Rose", 25, 30)
     plant2 = Plant("Tulip", 40, 7)
     print("=== Day 1 ===")

@@ -1,14 +1,11 @@
 import sys
 import math
-#to check when only 1 coordinate as ""
-    #maybe to put as a proper try/expect
-
-#ok need to work on the parsing might be a bit weak
+import re
 
 
 def parsing(str):
     print(f"Parsing coordinates: '{str}'...")
-    coords = str.split(",")
+    coords = re.split(r'[,\s]+', str)
     try:
         for c in coords:
             coord_tuple = tuple(int(c) for c in coords)
@@ -51,6 +48,7 @@ def check_error():
             f"The format and/or number of argument is wrong: {len(sys.argv)},"
             " please provide a string of 3 integer or 3 integers"
             )
+        return
 
     if len(coord_tuple) != 3:
         print(f"Error, excepted 3 coordinates, got {len(coord_tuple)}")
@@ -65,7 +63,7 @@ def distance_caculation(x2, y2, z2):
     x1, y1, z1 = 0, 0, 0
     distance = math.sqrt((x2-x1)**2 + (y2-y1)**2 + (z2-z1)**2)
     print(
-        f"Distance between ({x1}, {y1}, {z1}"
+        f"Distance between ({x1}, {y1}, {z1})"
         f" and ({x2}, {y2}, {z2}): {distance:.2f}"
         )
 

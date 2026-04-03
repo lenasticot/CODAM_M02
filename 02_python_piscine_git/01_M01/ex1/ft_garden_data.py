@@ -1,8 +1,11 @@
 class Plant:
-    def __init__(self, name, height, age):
-        self.name = name
-        self.height = height
-        self.age = age
+    """Represents a garden plant with name, height and age."""
+
+    def __init__(self, name: str, height: str, age: str) -> None:
+        """Initialize plant metadata."""
+        self.name: str = name
+        self.height: str = height
+        self.age: str = age
 
 
 if __name__ == "__main__":
