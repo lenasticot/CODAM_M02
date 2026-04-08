@@ -1,16 +1,21 @@
 from abc import ABC, abstractmethod
 from typing import Any
 
+
+# __init__  → set up empty internal storage (e.g. self.items = [])
+# validate  → check the incoming data, return True/False
+# ingest    → call validate, then add data to self.items
+# output    → pull something out of self.items and return it
+
 class DataProcessor(ABC):
 	@abstractmethod
 	def validate(self, data: Any) -> bool:
-		# will check whether the input data are appropriate for the current data process
 		pass
 	@abstractmethod
-	def ingest(self, data: Any) -> tuple [int, str]:
+	def ingest(self, data: Any) -> None: 
 		# will process the input data
 		pass
-	def output(self):
+	def output(self) -> tuple[int, str]:
 		# will extract the oldest piece of data stored internally in the data processor,
 		# along with the associated processing rank within the data processor
 		# to check what type of data to print accordingly the thing
@@ -23,6 +28,7 @@ class NumericProcessor(DataProcessor):
 	# it then converts the data into strings and stores it internally,
 	# waiting to be extracted using the output method.
 	# the overriding ingest method signature must reflect the accepted types
+
 	def validate(self, data: Any):
 		print(f"trying to validate input '{data}': ", end="")
 		try:
@@ -35,10 +41,11 @@ class NumericProcessor(DataProcessor):
 		# raising an error if it occurs
 		# if not 
 		# converts the data into strings and stores it internally
-		if self.validate == True: 
-			print("ok we're good")
-		else:
-			print("What are you trying to do?")
+		# just call validate inside ingest and raise if it returns False. 
+	
+		if not self.validate(data):
+			raise ValueError("you have not validated your data you fool")
+		self.result = str(data)
 
 class TextProcessor(DataProcessor):
 	# ingest str and lists of strings.
@@ -79,23 +86,28 @@ def main():
 	# exception must be raised.
 	print("=== CODE NEXUS - DATA PROCESSOR ===\n")
 	print("Testing Numeric Processor ...")
+	a = 42
+	b = 12
 	test_1 = NumericProcessor()
+	test_2 = NumericProcessor()
 	print(test_1.validate(42))
-	print(test_1.validate("oui"))
-	print(test_1.validate(1.5))
-	print(test_1.ingest(42))
-
-	test_2 = TextProcessor()
-	print("Testing Text Processor")
-	print(test_2.validate(42))
-	print(test_2.validate("oui"))
-	print(test_2.validate(["oui", "oui", "oui"]))
-	test_3 = LogProcessor()
-	print("Testing Log Processor")
-	print(test_3.validate(42))
-	print(test_3.validate("oui"))
-	print(test_3.validate(["oui", "oui", "oui"]))
-	print(test_3.validate([{'log_level': 'NOTICE', 'log_message': 'Connection to server'}, {'log_level': 'ERROR', 'log_message': 'Unauthorized access!!'}]))
+	# print(test_1.validate("oui"))
+	# print(test_1.validate([1.5, 42]))
+	print(test_1.ingest("fool"))
+	print(test_2.ingest(b))
+	print()
+	# test_2 = TextProcessor()
+	# print("Testing Text Processor")
+	# print(test_2.validate(42))
+	# print(test_2.validate("oui"))
+	# print(test_2.validate(["oui", "oui", "oui"]))
+	# print()
+	# test_3 = LogProcessor()
+	# print("Testing Log Processor")
+	# print(test_3.validate(42))
+	# print(test_3.validate("oui"))
+	# print(test_3.validate(["oui", "oui", "oui"]))
+	# print(test_3.validate([{'log_level': 'NOTICE', 'log_message': 'Connection to server'}, {'log_level': 'ERROR', 'log_message': 'Unauthorized access!!'}]))
 
 
 main()
