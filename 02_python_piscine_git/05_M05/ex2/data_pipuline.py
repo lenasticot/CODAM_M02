@@ -1,13 +1,7 @@
 from abc import ABC, abstractmethod
-from typing import Any, Tuple, List
+from typing import Any, Tuple, List, Protocol
 import typing
-
-
-# problems with the stats - should be removed from all processors that are registered
-# Stats verification:
-
-# Ingest some data, call output() a few times, then check that total stays the same but remaining decreases
-# Call output() more times than items exist — what happens? You have no guard for empty self.items in output()
+import csv, json
 
 class DataProcessor(ABC):
     def __init__(self):
@@ -113,6 +107,13 @@ class LogProcessor(DataProcessor):
                 self.total += 1
 
         print(f"Processing data: {self.items}")
+
+class ExportPlugin(Protocol):
+    def process_output(self, data: list[tuple[int, str]]) -> None:
+        # the type of the data parameter is a list of tuples
+        # that matches the return value of the output method from the DataProcessor class
+        processed = []
+        pass
   
 class DataStream():
     def __init__(self):
@@ -120,10 +121,7 @@ class DataStream():
     def register_processor(self, proc: DataProcessor) -> None:
         self.processors.append(proc)
         print(f"Processor {type(proc).__name__} has been added correctly")
-    def process_stream(self, stream: list[typing.Any]) -> None:
-        if not stream:
-            print("Error: cannot process an empty list")
-            return
+    def process_stream(self, stream: list[typing.Any]) ->None:
         if not self.processors:
             print("No processor found. Impossible to process the data")
             return
@@ -136,49 +134,26 @@ class DataStream():
                     flag = 1
                     break
             if flag == 0:
-                print(f"'{data}' cannot be handled by your currrent processors")
+                print(f"{data} cannot be handled by your currrent processors")
     def print_processors_stats(self) -> None:
         print("=== DataStream statistics ===")
         if not self.processors:
             print("No processor found, no data\n")
         for proc in self.processors:
             print(f"{type(proc).__name__} : total {proc.total} processed, remaining {len(proc.items)} on processor")
+    def output_pipeline(self, nb: int, plugin: ExportPlugin) -> None:
+        # will consume nb elements from all registered data processors and export them
+        # using the provided compatible plugin
+        pass
 
+
+    
 def main():
-    print("=== Code Nexus - Data Stream ===")
-    print("Initialize data stream...")
-    print()
-    test1 = DataStream()
-    test1.print_processors_stats()
-    test = ["Bonjour", 8, [42, "fool"], [48, 15, 16, 23, 42], ["on", "a", "pas", "eleve", "les", "cochons", "ensemble"]]
-    print(f"Send first batch of data on stream: {test}")
-    print()
-    test1.process_stream(test)
-    print()
-
-    print("Registering Processors...")
-    test1.register_processor(NumericProcessor())
-    test1.register_processor(LogProcessor())
-    print()
-    test1.process_stream(test)
-    print()
-    print("Sending empty batch of data on stream")
-    test2 = []
-    test1.process_stream(test2)
-    test1.print_processors_stats()
-    test3 = [42, {'machin': 'truc'}, "oui", ["oui", "oui", "oui"], [{'log_level': 'NOTICE', 'log_message': 'Connection to server'}, {'log_level': 'ERROR', 'log_message': 'Unauthorized access!!'}]]
-    print(f"Send second batch of data on stream: {test3}")
-    print()
-    test1.process_stream(test3)
-    test1.print_processors_stats()
-    print()
-    x = 5
-    print(f"Extracting {x} values...")
-    for y in range(0, x):
-        a, b = test1.processors[0].output()
-        print(f"Text Value {a}: {b}")
-    print()
-    test1.print_processors_stats()
+    # Create at least a CSV export plugin and a JSON export plugin.
+    # No need to use a specific import for these plugins, manually create valid CSV and JSON strings
+    test = DataStream()
+    
+    pass
     
 
     
