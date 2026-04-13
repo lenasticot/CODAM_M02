@@ -3,6 +3,8 @@ from typing import Any, Tuple, List, Protocol
 import typing
 import csv, json
 
+# What happens if output_pipeline is called with an empty result list because all processors were empty? process_output would receive [] and print an empty output. Worth adding a guard?
+
 class DataProcessor(ABC):
     def __init__(self):
         self.items: List = []
@@ -110,10 +112,31 @@ class LogProcessor(DataProcessor):
 
 class ExportPlugin(Protocol):
     def process_output(self, data: list[tuple[int, str]]) -> None:
-        # the type of the data parameter is a list of tuples
-        # that matches the return value of the output method from the DataProcessor class
-        processed = []
-        pass
+        ...
+
+class CSVExporter:
+    def process_output(self, data):
+        res = []
+        with open("TestCSV.csv", "w+") as f:
+            for d, e in data:
+                res.append(e)
+            result = ",".join(res)
+            f.write(result)
+            f.write("\n")      
+            print(f"CSV Output:\n{result}")
+
+
+class JSONExporter:
+    def process_output(self, data):
+        with open("TestJSON.JSON", "w") as f:
+            f.write("JSON Output: \n")
+            res = []
+            for d, e in data:
+                res.append(f'item_"{d}": "{e}"')
+            result = ", ".join(res)
+            f.write(result)
+            f.write("\n")
+            print(f"JSON Output:\n{{{result}}}")
   
 class DataStream():
     def __init__(self):
@@ -142,18 +165,49 @@ class DataStream():
         for proc in self.processors:
             print(f"{type(proc).__name__} : total {proc.total} processed, remaining {len(proc.items)} on processor")
     def output_pipeline(self, nb: int, plugin: ExportPlugin) -> None:
-        # will consume nb elements from all registered data processors and export them
-        # using the provided compatible plugin
-        pass
+        for processor in self.processors:
+            result = []
+            for x in range(0, nb):
+                if len(processor.items) > 0:
+                    a, b = processor.output()
+                    result.append((a, b))
+            plugin.process_output(result)
 
 
     
 def main():
-    # Create at least a CSV export plugin and a JSON export plugin.
-    # No need to use a specific import for these plugins, manually create valid CSV and JSON strings
-    test = DataStream()
-    
-    pass
+    print("=== Code Nexus - Data Stream ===")
+    print("Initialize data stream...")
+    print()
+    test1 = DataStream()
+    test1.print_processors_stats()
+    test = ["Bonjour", 8, [42, "fool"], [48, 15, 16, 23, 42], ["on", "a", "pas", "eleve", "les", "cochons", "ensemble"]]
+    print(f"Send first batch of data on stream: {test}")
+    print()
+    test1.process_stream(test)
+    print()
+
+    print("Registering Processors...")
+    test1.register_processor(NumericProcessor())
+    test1.register_processor(LogProcessor())
+    print()
+    test1.process_stream(test)
+    print()
+    test1.print_processors_stats()
+    test3 = [42, {'machin': 'truc'}, "oui", ["oui", "oui", "oui"], [{'log_level': 'NOTICE', 'log_message': 'Connection to server'}, {'log_level': 'ERROR', 'log_message': 'Unauthorized access!!'}]]
+    print(f"Send second batch of data on stream: {test3}")
+    print()
+    test1.process_stream(test3)
+    test1.print_processors_stats()
+    print()
+
+    print(f"Send 2 processed data from each processor to a CSV plugin:")
+    test1.output_pipeline(2, CSVExporter())
+    print()
+
+    print(f"Send 2 processed data from each processor to a JSON plugin:")
+    test1.output_pipeline(4, JSONExporter())
+    test1.print_processors_stats()
     
 
     

@@ -4,10 +4,7 @@ import typing
 
 
 # problems with the stats - should be removed from all processors that are registered
-# Stats verification:
-
-# Ingest some data, call output() a few times, then check that total stays the same but remaining decreases
-# Call output() more times than items exist — what happens? You have no guard for empty self.items in output()
+# now only from the last processor
 
 class DataProcessor(ABC):
     def __init__(self):
@@ -20,7 +17,10 @@ class DataProcessor(ABC):
     @abstractmethod
     def ingest(self, data: Any) -> None: 
         pass
-    def output(self) -> tuple[int, str]:
+    def output(self) -> tuple[int, str] | None:
+        #need to work if empty
+        if not self.items:
+            return
         item = self.items[0]
         self.items.pop(0)
         self.pos += 1
@@ -172,11 +172,14 @@ def main():
     test1.process_stream(test3)
     test1.print_processors_stats()
     print()
-    x = 5
-    print(f"Extracting {x} values...")
-    for y in range(0, x):
-        a, b = test1.processors[0].output()
-        print(f"Text Value {a}: {b}")
+
+
+    for processor in test1.processors:
+        x = 5
+        print(f"Extracting {x} values from {type(processor).__name__}...")
+        for y in range(0, x):
+            a, b = processor.output()
+            print(f"Text Value {a}: {b}")
     print()
     test1.print_processors_stats()
     
