@@ -1,21 +1,22 @@
 from abc import ABC, abstractmethod
-from typing import Any, Tuple, List, Protocol
+from typing import Any, List, Protocol
 import typing
-import csv, json
 
-# What happens if output_pipeline is called with an empty result list because all processors were empty? process_output would receive [] and print an empty output. Worth adding a guard?
 
 class DataProcessor(ABC):
     def __init__(self):
         self.items: List = []
         self.pos: int = -1
         self.total: int = 0
+
     @abstractmethod
     def validate(self, data: Any) -> bool:
         print(f"trying to validate input '{data}': ", end="")
+
     @abstractmethod
-    def ingest(self, data: Any) -> None: 
+    def ingest(self, data: Any) -> None:
         pass
+
     def output(self) -> tuple[int, str]:
         item = self.items[0]
         self.items.pop(0)
@@ -39,9 +40,13 @@ class NumericProcessor(DataProcessor):
                     return False
             return True
         return False
+
     def ingest(self, data: int | float | list) -> None:
         if not self.validate(data):
-            print(f"Test invalid ingestion of string '{data}' without prior validation:")
+            print(
+                  f"Test invalid ingestion of string '{data}'"
+                  "without prior validation:"
+                  )
             raise ValueError("Got exception: Improper numeric data")
         if isinstance(data, list):
             for d in data:
@@ -67,9 +72,13 @@ class TextProcessor(DataProcessor):
             return True
         else:
             return False
+
     def ingest(self, data: str | list) -> None:
         if not self.validate(data):
-            print(f"Test invalid ingestion of data '{data}' without prior validation:")
+            print(
+                  f"Test invalid ingestion of data '{data}'"
+                  "without prior validation:"
+                 )
             raise ValueError("Got exception: Improper string data")
         if isinstance(data, list):
             for d in data:
@@ -94,9 +103,13 @@ class LogProcessor(DataProcessor):
             return True
         else:
             return False
+
     def ingest(self, data:  dict | list):
         if not self.validate(data):
-            print(f"Test invalid ingestion of data '{data}' without prior validation:")
+            print(
+                  f"Test invalid ingestion of data '{data}'"
+                  "without prior validation:"
+                 )
             raise ValueError("Got exception: Improper dict data")
         if isinstance(data, list):
             for d in data:
@@ -107,12 +120,13 @@ class LogProcessor(DataProcessor):
             for key, value in data.items():
                 self.items.append(str(f"{key}: {value}"))
                 self.total += 1
-
         print(f"Processing data: {self.items}")
+
 
 class ExportPlugin(Protocol):
     def process_output(self, data: list[tuple[int, str]]) -> None:
         ...
+
 
 class CSVExporter:
     def process_output(self, data):
@@ -122,7 +136,7 @@ class CSVExporter:
                 res.append(e)
             result = ",".join(res)
             f.write(result)
-            f.write("\n")      
+            f.write("\n")
             print(f"CSV Output:\n{result}")
 
 
@@ -137,36 +151,50 @@ class JSONExporter:
             f.write(result)
             f.write("\n")
             print(f"JSON Output:\n{{{result}}}")
-  
+
+
 class DataStream():
     def __init__(self):
         self.processors = []
+
     def register_processor(self, proc: DataProcessor) -> None:
         self.processors.append(proc)
         print(f"Processor {type(proc).__name__} has been added correctly")
-    def process_stream(self, stream: list[typing.Any]) ->None:
+
+    def process_stream(self, stream: list[typing.Any]) -> None:
         if not self.processors:
             print("No processor found. Impossible to process the data")
             return
-        for data in stream:   
+        for data in stream:
             flag = 0
             for proc in self.processors:
                 if proc.validate(data):
                     proc.ingest(data)
-                    print(f"{data} has been correctly handled by {type(proc).__name__}")
+                    print(
+                          f"{data} has been correctly handled by"
+                          f"{type(proc).__name__}"
+                         )
                     flag = 1
                     break
             if flag == 0:
                 print(f"{data} cannot be handled by your currrent processors")
+
     def print_processors_stats(self) -> None:
         print("=== DataStream statistics ===")
         if not self.processors:
             print("No processor found, no data\n")
         for proc in self.processors:
-            print(f"{type(proc).__name__} : total {proc.total} processed, remaining {len(proc.items)} on processor")
+            print(
+                  f"{type(proc).__name__} : total "
+                  f"{proc.total} processed, remaining "
+                  f"{len(proc.items)} on processor"
+                 )
+
     def output_pipeline(self, nb: int, plugin: ExportPlugin) -> None:
         for processor in self.processors:
             result = []
+            if len(processor.items) == 0:
+                return
             for x in range(0, nb):
                 if len(processor.items) > 0:
                     a, b = processor.output()
@@ -174,14 +202,17 @@ class DataStream():
             plugin.process_output(result)
 
 
-    
 def main():
     print("=== Code Nexus - Data Stream ===")
     print("Initialize data stream...")
     print()
     test1 = DataStream()
     test1.print_processors_stats()
-    test = ["Bonjour", 8, [42, "fool"], [48, 15, 16, 23, 42], ["on", "a", "pas", "eleve", "les", "cochons", "ensemble"]]
+    test = [
+            "Bonjour", 8, [42, "fool"],
+            [48, 15, 16, 23, 42],
+            ["on", "a", "pas", "eleve", "les", "cochons", "ensemble"]
+           ]
     print(f"Send first batch of data on stream: {test}")
     print()
     test1.process_stream(test)
@@ -194,23 +225,38 @@ def main():
     test1.process_stream(test)
     print()
     test1.print_processors_stats()
-    test3 = [42, {'machin': 'truc'}, "oui", ["oui", "oui", "oui"], [{'log_level': 'NOTICE', 'log_message': 'Connection to server'}, {'log_level': 'ERROR', 'log_message': 'Unauthorized access!!'}]]
+    test3 = [
+             42, {'machin': 'truc'}, "oui", ["oui", "oui", "oui"],
+             [{'log_level': 'NOTICE', 'log_message': 'Connection to server'},
+              {'log_level': 'ERROR', 'log_message': 'Unauthorized access!!'}]
+            ]
     print(f"Send second batch of data on stream: {test3}")
     print()
     test1.process_stream(test3)
     test1.print_processors_stats()
     print()
 
-    print(f"Send 2 processed data from each processor to a CSV plugin:")
+    print("Send 2 processed data from each processor to a CSV plugin:")
     test1.output_pipeline(2, CSVExporter())
     print()
 
-    print(f"Send 2 processed data from each processor to a JSON plugin:")
+    print("Send 4 processed data from each processor to a JSON plugin:")
     test1.output_pipeline(4, JSONExporter())
     test1.print_processors_stats()
-    
+    print()
+    print(
+          "Send 4 processed data from each processor "
+          "to a JSON plugin but one is empty:"
+          )
+    test1.output_pipeline(4, JSONExporter())
+    test1.print_processors_stats()
+    print()
+    print(
+          "Send 4 processed data from each processor "
+          "to a JSON plugin but both are empty:"
+         )
+    test1.output_pipeline(4, JSONExporter())
+    test1.print_processors_stats()
 
-    
-    
+
 main()
-

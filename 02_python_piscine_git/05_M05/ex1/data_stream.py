@@ -1,24 +1,23 @@
 from abc import ABC, abstractmethod
-from typing import Any, Tuple, List
+from typing import Any, List
 import typing
 
-
-# problems with the stats - should be removed from all processors that are registered
-# now only from the last processor
 
 class DataProcessor(ABC):
     def __init__(self):
         self.items: List = []
         self.pos: int = -1
         self.total: int = 0
+
     @abstractmethod
     def validate(self, data: Any) -> bool:
         print(f"trying to validate input '{data}': ", end="")
+
     @abstractmethod
-    def ingest(self, data: Any) -> None: 
+    def ingest(self, data: Any) -> None:
         pass
+
     def output(self) -> tuple[int, str] | None:
-        #need to work if empty
         if not self.items:
             return
         item = self.items[0]
@@ -43,9 +42,13 @@ class NumericProcessor(DataProcessor):
                     return False
             return True
         return False
+
     def ingest(self, data: int | float | list) -> None:
         if not self.validate(data):
-            print(f"Test invalid ingestion of string '{data}' without prior validation:")
+            print(
+                  f"Test invalid ingestion of string '{data}' "
+                  "without prior validation:"
+                 )
             raise ValueError("Got exception: Improper numeric data")
         if isinstance(data, list):
             for d in data:
@@ -71,9 +74,13 @@ class TextProcessor(DataProcessor):
             return True
         else:
             return False
+
     def ingest(self, data: str | list) -> None:
         if not self.validate(data):
-            print(f"Test invalid ingestion of data '{data}' without prior validation:")
+            print(
+                  f"Test invalid ingestion of data '{data}'"
+                  " without prior validation:"
+                 )
             raise ValueError("Got exception: Improper string data")
         if isinstance(data, list):
             for d in data:
@@ -98,9 +105,13 @@ class LogProcessor(DataProcessor):
             return True
         else:
             return False
+
     def ingest(self, data:  dict | list):
         if not self.validate(data):
-            print(f"Test invalid ingestion of data '{data}' without prior validation:")
+            print(
+                  f"Test invalid ingestion of data '{data}'"
+                  " without prior validation:"
+                 )
             raise ValueError("Got exception: Improper dict data")
         if isinstance(data, list):
             for d in data:
@@ -111,38 +122,54 @@ class LogProcessor(DataProcessor):
             for key, value in data.items():
                 self.items.append(str(f"{key}: {value}"))
                 self.total += 1
-
         print(f"Processing data: {self.items}")
-  
+
+
 class DataStream():
     def __init__(self):
         self.processors = []
+
     def register_processor(self, proc: DataProcessor) -> None:
         self.processors.append(proc)
         print(f"Processor {type(proc).__name__} has been added correctly")
+
     def process_stream(self, stream: list[typing.Any]) -> None:
         if not stream:
             print("Error: cannot process an empty list")
             return
         if not self.processors:
-            print("No processor found. Impossible to process the data")
+            print(
+                  "No processor found. Impossible to process the data"
+                 )
             return
-        for data in stream:   
+        for data in stream:
             flag = 0
             for proc in self.processors:
                 if proc.validate(data):
                     proc.ingest(data)
-                    print(f"{data} has been correctly handled by {type(proc).__name__}")
+                    print(
+                          f"{data} has been correctly "
+                          f"handled by {type(proc).__name__}"
+                         )
                     flag = 1
                     break
             if flag == 0:
-                print(f"'{data}' cannot be handled by your currrent processors")
+                print(
+                      f"'{data}' cannot be handled by "
+                      "your currrent processors"
+                     )
+
     def print_processors_stats(self) -> None:
         print("=== DataStream statistics ===")
         if not self.processors:
             print("No processor found, no data\n")
         for proc in self.processors:
-            print(f"{type(proc).__name__} : total {proc.total} processed, remaining {len(proc.items)} on processor")
+            print(
+                  f"{type(proc).__name__} : total "
+                  f"{proc.total} processed, remaining "
+                  f"{len(proc.items)} on processor"
+                 )
+
 
 def main():
     print("=== Code Nexus - Data Stream ===")
@@ -150,7 +177,11 @@ def main():
     print()
     test1 = DataStream()
     test1.print_processors_stats()
-    test = ["Bonjour", 8, [42, "fool"], [48, 15, 16, 23, 42], ["on", "a", "pas", "eleve", "les", "cochons", "ensemble"]]
+    test = [
+            "Bonjour", 8, [42, "fool"],
+            [48, 15, 16, 23, 42],
+            ["on", "a", "pas", "eleve", "les", "cochons", "ensemble"]
+           ]
     print(f"Send first batch of data on stream: {test}")
     print()
     test1.process_stream(test)
@@ -166,13 +197,19 @@ def main():
     test2 = []
     test1.process_stream(test2)
     test1.print_processors_stats()
-    test3 = [42, {'machin': 'truc'}, "oui", ["oui", "oui", "oui"], [{'log_level': 'NOTICE', 'log_message': 'Connection to server'}, {'log_level': 'ERROR', 'log_message': 'Unauthorized access!!'}]]
+    test3 = [
+             42, {'machin': 'truc'}, "oui",
+             ["oui", "oui", "oui"],
+             [
+                {'log_level': 'NOTICE', 'log_message': 'Connection to server'},
+                {'log_level': 'ERROR', 'log_message': 'Unauthorized access!!'}
+             ]
+            ]
     print(f"Send second batch of data on stream: {test3}")
     print()
     test1.process_stream(test3)
     test1.print_processors_stats()
     print()
-
 
     for processor in test1.processors:
         x = 5
@@ -182,9 +219,6 @@ def main():
             print(f"Text Value {a}: {b}")
     print()
     test1.print_processors_stats()
-    
 
-    
-    
+
 main()
-
