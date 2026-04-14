@@ -9,13 +9,15 @@ class DataProcessor(ABC):
 
     @abstractmethod
     def validate(self, data: Any) -> bool:
-        print(f"trying to validate input '{data}': ", end="")
+        ...
 
     @abstractmethod
     def ingest(self, data: Any) -> None:
-        pass
+        ...
 
     def output(self) -> tuple[int, str]:
+        if not self.items:
+            raise IndexError("No items left to extract")
         item = self.items[0]
         self.items.pop(0)
         self.pos += 1
@@ -134,8 +136,11 @@ def main():
     x = 3
     print(f"Extracting {x} values...")
     for y in range(0, x):
-        a, b = test_1.output()
-        print(f"Numeric value {a}: {b}")
+        try:
+            a, b = test_1.output()
+            print(f"Numeric value {a}: {b}")
+        except IndexError as e:
+            print(e)
     print()
 
     test_2 = TextProcessor()
@@ -160,8 +165,12 @@ def main():
     x = 3
     print(f"Extracting {x} values...")
     for y in range(0, x):
-        a, b = test_2.output()
-        print(f"Text Value {a}: {b}")
+        try:
+            a, b = test_2.output()
+            print(f"Text Value {a}: {b}")
+        except IndexError as e:
+            print(e)
+
     print()
 
     test_3 = LogProcessor()
@@ -184,10 +193,14 @@ def main():
         except ValueError as e:
             print(e)
     x = 3
+    print()
     print(f"Extracting {x} values...")
     for y in range(0, x):
-        a, b = test_3.output()
-        print(f"Log value {a}: {b}")
+        try:
+            a, b = test_3.output()
+            print(f"Log value {a}: {b}")
+        except IndexError as e:
+            print(e)
     print()
 
 

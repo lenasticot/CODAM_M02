@@ -11,13 +11,15 @@ class DataProcessor(ABC):
 
     @abstractmethod
     def validate(self, data: Any) -> bool:
-        print(f"trying to validate input '{data}': ", end="")
+        ...
 
     @abstractmethod
     def ingest(self, data: Any) -> None:
-        pass
+        ...
 
     def output(self) -> tuple[int, str]:
+        if not self.items:
+            raise IndexError("No items left to extract")
         item = self.items[0]
         self.items.pop(0)
         self.pos += 1
@@ -146,7 +148,7 @@ class JSONExporter:
             f.write("JSON Output: \n")
             res = []
             for d, e in data:
-                res.append(f'item_"{d}": "{e}"')
+                res.append(f'"item_{d}": "{e}"')
             result = ", ".join(res)
             f.write(result)
             f.write("\n")
@@ -164,6 +166,9 @@ class DataStream():
     def process_stream(self, stream: list[typing.Any]) -> None:
         if not self.processors:
             print("No processor found. Impossible to process the data")
+            return
+        if not stream:
+            print("Error: cannot process an empty list")
             return
         for data in stream:
             flag = 0
@@ -194,7 +199,7 @@ class DataStream():
         for processor in self.processors:
             result = []
             if len(processor.items) == 0:
-                return
+                continue
             for x in range(0, nb):
                 if len(processor.items) > 0:
                     a, b = processor.output()

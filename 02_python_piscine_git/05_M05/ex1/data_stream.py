@@ -11,15 +11,15 @@ class DataProcessor(ABC):
 
     @abstractmethod
     def validate(self, data: Any) -> bool:
-        print(f"trying to validate input '{data}': ", end="")
+        ...
 
     @abstractmethod
     def ingest(self, data: Any) -> None:
-        pass
+        ...
 
-    def output(self) -> tuple[int, str] | None:
+    def output(self) -> tuple[int, str]:
         if not self.items:
-            return
+            raise IndexError("No items left to extract")
         item = self.items[0]
         self.items.pop(0)
         self.pos += 1
@@ -27,7 +27,7 @@ class DataProcessor(ABC):
 
 
 class NumericProcessor(DataProcessor):
-    def validate(self, data: Any):
+    def validate(self, data: Any) -> bool:
         if isinstance(data, int):
             return True
         elif isinstance(data, float):
@@ -62,7 +62,7 @@ class NumericProcessor(DataProcessor):
 
 
 class TextProcessor(DataProcessor):
-    def validate(self, data: Any):
+    def validate(self, data: Any) -> bool:
         if isinstance(data, str):
             return True
         elif isinstance(data, list):
@@ -93,7 +93,7 @@ class TextProcessor(DataProcessor):
 
 
 class LogProcessor(DataProcessor):
-    def validate(self, data: Any):
+    def validate(self, data: Any) -> bool:
         if isinstance(data, dict):
             return True
         elif isinstance(data, list):
@@ -215,8 +215,11 @@ def main():
         x = 5
         print(f"Extracting {x} values from {type(processor).__name__}...")
         for y in range(0, x):
-            a, b = processor.output()
-            print(f"Text Value {a}: {b}")
+            try:
+                a, b = processor.output()
+                print(f"{type(processor).__name__} value {a}: {b}")
+            except IndexError as e:
+                print(e)
     print()
     test1.print_processors_stats()
 
