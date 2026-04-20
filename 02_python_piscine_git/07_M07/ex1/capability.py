@@ -1,24 +1,21 @@
 from abc import ABC, abstractmethod
-from ex0.creature_cards import Creature
-from ex0.creature_factory import CreatureFactory
+
 
 class HealCapability(ABC):
     @abstractmethod
-    def heal(self, target):
+    def heal(self) -> str:
         pass
 
 
 class TransformCapability(ABC):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
-        self.transformed = False
+        self.transformed: bool = False
+
     @abstractmethod
-    def transform(self):
-        pass
-    @abstractmethod
-    def revert(self):
+    def transform(self) -> str:
         pass
 
-
-
-
+    @abstractmethod
+    def revert(self) -> str:
+        pass

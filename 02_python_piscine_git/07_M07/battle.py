@@ -20,7 +20,7 @@ def creating_creatures(factory: CreatureFactory):
     except Exception as e:
         print(f"Factory failed: {e}")
         raise
-        
+
 
 def main():
     flame = FlameFactory()
@@ -33,5 +33,6 @@ def main():
     print()
     print("Testing battle")
     creatures_fight(flam, aqu)
+
 
 main()

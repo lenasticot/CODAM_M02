@@ -8,12 +8,13 @@ def healing_factory():
     print("base:")
     print(base.describe())
     print(base.attack())
-    print(base.heal("Sproutling"))
+    print(base.heal())
     print()
     print("evolved:")
     print(evo.describe())
     print(evo.attack())
-    print(evo.heal("Sproutling"))
+    print(evo.heal())
+
 
 def transform_factory():
     t = TransformCreatureFactory()
@@ -32,13 +33,14 @@ def transform_factory():
     print(evo.transform())
     print(evo.attack())
     print(evo.revert())
-    
-    
+
+
 def main():
     print("Testing Creature with healing capability")
     healing_factory()
     print()
     print("Testing Creature with transform capability")
     transform_factory()
+
 
 main()
