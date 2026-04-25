@@ -1,0 +1,3 @@
+Pydantic is a data validation and settings management library for Python
+Pydantic uses type hints to help you validate and serialize your data schemas, making your code more robust, readable, concise, and easier to debug
+
