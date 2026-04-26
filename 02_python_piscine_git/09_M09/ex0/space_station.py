@@ -1,6 +1,3 @@
-# learn basic pydantic model creation with BaseModel and Field Validation
-
-# Create a Pydantic model with these validaated fields
 from pydantic import BaseModel, Field, ValidationError
 from datetime import datetime
 from typing import Optional
