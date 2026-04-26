@@ -1,0 +1,4 @@
+lambda functions are small anonymous functions, meaning they do not have a defined name.
+Thse are small, short-lived functions used to pass simple logic to another function.
+syntax:
+	a=lambda x:x**2
