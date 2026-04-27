@@ -1,0 +1,15 @@
+lambda functions are small anonymous functions, meaning they do not have a defined name.
+Thse are small, short-lived functions used to pass simple logic to another function.
+syntax:
+	a=lambda x:x**2
+
+Callable() is a function that can check if an object is callable, meaning check if it can be called like a function.
+
+nonlocal keyword lets you declare a veriable in a nested function as not local to that function.
+It allows you to modify variables defined in the enclosing scope from within an inner function
+It is useful for:
+	- Modifying variables in enclosing scopes, particularly useful in closures
+	- Maintaining state in nested functions
+	- Avoiding the use of global variables for encapsulation and scope management
+
+LEGB rule: Python uses lexical scoping with the LEGB rule (Local, Enclosing, Global and Built-in).
