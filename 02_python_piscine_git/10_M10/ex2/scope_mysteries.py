@@ -47,4 +47,14 @@ def main():
     
     sort = enchantment_factory("flaming")
     print(f"{sort("sword")}")
+    
+    # memory vault tests
+    vault = memory_vault()
+
+    vault["store"]("sword", "Excalibur")
+    vault["store"]("spell", "Fireball")
+    
+    vault["recall"]("sword") 
+    vault["recall"]("spell")
+    vault["recall"]("shield") 
 main()

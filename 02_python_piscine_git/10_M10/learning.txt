@@ -13,3 +13,7 @@ It is useful for:
 	- Avoiding the use of global variables for encapsulation and scope management
 
 LEGB rule: Python uses lexical scoping with the LEGB rule (Local, Enclosing, Global and Built-in).
+
+Functools module offers a collection of tools that implify working with functions
+and callable objects. It includes utilities to modify, extend or optimize functions without
+rewriting their core logic, helping you write cleaner and more efficient code

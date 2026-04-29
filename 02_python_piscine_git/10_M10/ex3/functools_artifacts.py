@@ -30,12 +30,35 @@ def memoized_fibonacci(n: int) -> int:
     return memoized_fibonacci(n -1) + memoized_fibonacci(n - 2)
 
 
-@singledispatch
+
 def spell_dispatcher() -> Callable[[Any], str]:
-    pass
+    @singledispatch
+    def spell(arg):
+        return "Unknown spell type"
+    
+    @spell.register(int)
+    def _(arg):
+        return f"Damage spell hits for {arg}"
+        
+    @spell.register(str)
+    def _(arg):
+        return f"Enchantment: {arg}"
+    
+    @spell.register(list)
+    def _(arg):
+        return f"Multi-cast: {arg}"
+    return spell
 
 def main():
-    spell_reducer([10, 20, 30], "add")       
-    spell_reducer([2, 3, 4], "multiply")     
-    spell_reducer([10, 50, 30], "max")       
-    spell_reducer([10, 50, 30], "min")            
+    print(spell_reducer([10, 20, 30], "add"))       
+    print(spell_reducer([2, 3, 4], "multiply"))     
+    print(spell_reducer([10, 50, 30], "max"))    
+    print(spell_reducer([10, 50, 30], "min"))
+    
+    dispatch = spell_dispatcher()
+    print(dispatch(50)) 
+    print(dispatch("Fireball"))   
+    print(dispatch([1, 2, 3]))  
+    print(dispatch(3.14))
+    
+main()
